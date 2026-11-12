@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Awakening Consciousness Course</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Vazirmatn:wght@400;500;700&display=swap">
+<style>
+/* Layout: dawn hero, sticky chip nav, progress board, then one column of learn / practise / test modules. */
+:root{
+  --bg:#eef1f8; --surface:#ffffff; --ink:#141a33; --muted:#505879; --line:#d3d9ec;
+  --night:#1b2150; --accent:#a35c08; --glow:#e8a33d; --glow-soft:#fbe9c8; --dim:#c9cfe6;
+  --ok:#1d7448; --ok-bg:#e0f3e8; --bad:#a73a28; --bad-bg:#fbe5e0;
+  --hero-a:#1b2150; --hero-b:#3a3f8f; --hero-c:#f2b25c; --hero-ink:#f4f5ff;
+  --font-body:'Inter','Vazirmatn',system-ui,sans-serif;
+  --font-display:'Newsreader','Vazirmatn',Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0f2e; --surface:#141a43; --ink:#e9ebfa; --muted:#a4abd2; --line:#2a3270;
+    --night:#0b0f2e; --accent:#f0b35a; --glow:#f0b35a; --glow-soft:#3a3320; --dim:#2b3366;
+    --ok:#6fd49c; --ok-bg:#16382b; --bad:#ff9a85; --bad-bg:#44201b;
+    --hero-a:#0b0f2e; --hero-b:#262c6b; --hero-c:#c98a3c; --hero-ink:#f4f5ff;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0f2e; --surface:#141a43; --ink:#e9ebfa; --muted:#a4abd2; --line:#2a3270;
+  --night:#0b0f2e; --accent:#f0b35a; --glow:#f0b35a; --glow-soft:#3a3320; --dim:#2b3366;
+  --ok:#6fd49c; --ok-bg:#16382b; --bad:#ff9a85; --bad-bg:#44201b;
+  --hero-a:#0b0f2e; --hero-b:#262c6b; --hero-c:#c98a3c; --hero-ink:#f4f5ff;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;margin:0}
+html[lang="fa"] body{line-height:1.9}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.2}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--glow);outline-offset:2px}
+.wrap{max-width:900px;margin-inline:auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.hero{background:linear-gradient(180deg,var(--hero-a) 0%,var(--hero-b) 62%,var(--hero-c) 100%);color:var(--hero-ink);padding-block:34px 54px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset-inline-end:-60px;bottom:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#ffe2a8 0%,#f5b85e 45%,rgba(245,184,94,0) 70%);opacity:.9}
+.hero .wrap{position:relative;z-index:1}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:26px}
+.lang{display:inline-flex;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px;gap:2px}
+.lang button{background:none;border:0;border-radius:999px;padding:4px 14px;color:var(--hero-ink);font-size:14px}
+.lang button[aria-pressed="true"]{background:#fff;color:#1b2150;font-weight:600}
+.hero h1{font-size:clamp(2.3rem,7vw,3.8rem);font-weight:600;letter-spacing:-.01em}
+.hero p{max-width:36em;margin-top:14px;font-size:1.06rem;opacity:.94}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:thin}
+.nav button{flex:none;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--muted)}
+.nav button:hover{color:var(--ink);border-color:var(--accent)}
+main{padding-block:12px 40px}
+.sec{padding-block:44px 6px;scroll-margin-top:64px}
+.sh h2{font-size:clamp(1.65rem,4.5vw,2.2rem);font-weight:600}
+.sh p{color:var(--muted);max-width:42em;margin-top:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px}
+.btn{background:var(--night);color:#fff;border:0;border-radius:10px;padding:9px 18px;font-weight:500}
+:root[data-theme="dark"] .btn{background:var(--glow);color:#1b2150}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{background:var(--glow);color:#1b2150}}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+:root[data-theme="dark"] .btn.ghost{background:none;color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.ghost{background:none;color:var(--ink)}}
+.small{font-size:.88rem;color:var(--muted)}
+.src{font-size:.82rem;color:var(--muted);margin-top:10px}
+.src a,footer a{color:var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+blockquote{margin:14px 0 0;padding-inline-start:14px;border-inline-start:3px solid var(--glow);font-family:var(--font-display);font-size:1.1rem;line-height:1.5}
+blockquote cite{display:block;font-family:var(--font-body);font-style:normal;font-size:.82rem;color:var(--muted);margin-top:4px}
+.note{background:var(--glow-soft);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:.92rem}
+.qn{font-size:.85rem;color:var(--muted)}
+
+/* progress board */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;margin-top:18px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile b{display:block;font-family:var(--font-display);font-size:1.9rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.tile span{font-size:.84rem;color:var(--muted)}
+.mini{height:6px;border-radius:99px;background:var(--dim);margin-top:8px;overflow:hidden;direction:ltr}
+.mini i{display:block;height:100%;background:var(--glow)}
+
+/* lessons + obstacles accordions */
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-top:10px}
+summary{cursor:pointer;padding:14px 18px;font-weight:500;list-style:none;display:flex;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-inline-start:auto;color:var(--accent);font-weight:600}
+details[open] summary::after{content:"\2212"}
+details .dbody{padding:0 18px 16px;color:var(--muted)}
+details .dbody ul{margin:8px 0;padding-inline-start:20px}
+details .dbody li{margin:4px 0}
+.take{color:var(--ink);font-family:var(--font-display);font-size:1.12rem;line-height:1.45;margin-bottom:6px}
+.lnum{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--dim);color:var(--ink);font-size:.85rem;font-weight:600}
+.lnum.on{background:var(--ok-bg);color:var(--ok)}
+
+/* light model */
+.lightgrid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:700px){.lightgrid{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;max-width:300px;direction:ltr}
+.dot{aspect-ratio:1;border-radius:50%;background:var(--dim);transition:background .5s,box-shadow .5s,transform .3s}
+.dot.lit{background:var(--glow);box-shadow:0 0 10px var(--glow)}
+.dot.sel{outline:2px solid var(--ink);outline-offset:1px;transform:scale(1.12)}
+.meter{margin-top:14px;max-width:300px}
+.meter b{font-family:var(--font-display);font-size:2rem;font-weight:600;color:var(--accent)}
+.bar{position:relative;height:8px;background:var(--dim);border-radius:99px;margin-top:6px;direction:ltr}
+.bar i{display:block;height:100%;background:var(--glow);border-radius:99px;transition:width .5s}
+.bar u{position:absolute;top:-4px;height:16px;width:2px;background:var(--ink);left:5%}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 14px}
+.chip[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.chip.done{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
+.steps{margin-top:16px;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
+@media (max-width:480px){.step{grid-template-columns:1fr}}
+
+/* ladder */
+.ladder{display:grid;gap:8px;margin-top:18px}
+.rung{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.rung > button{width:100%;display:flex;align-items:center;gap:14px;background:none;border:0;padding:14px 18px;text-align:start}
+.rung .lvl{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:600;background:var(--dim)}
+.rung[data-open="true"] .lvl{background:var(--glow);color:#1b2150}
+.rung .name{font-family:var(--font-display);font-size:1.2rem;font-weight:600}
+.rung .body{padding:0 18px 16px;padding-inline-start:66px;color:var(--muted)}
+.rung[data-w="2"]{margin-inline-start:16px}.rung[data-w="3"]{margin-inline-start:32px}.rung[data-w="4"]{margin-inline-start:48px}
+.tagpill{font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:1px 10px;color:var(--muted);margin-inline-start:auto}
+.cross{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:20px;align-items:center;margin-top:20px}
+@media (max-width:600px){.cross{grid-template-columns:1fr}}
+.cross svg{width:100%;max-width:220px;height:auto}
+
+/* options / feedback */
+.scene{font-family:var(--font-display);font-size:1.25rem;line-height:1.45}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.opt{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 16px;text-align:start}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.opt.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.opt.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.fb{margin-top:12px;padding:10px 14px;border-radius:10px}
+.fb.ok{background:var(--ok-bg)}.fb.no{background:var(--bad-bg)}
+.centers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+@media (max-width:560px){.centers{grid-template-columns:1fr}}
+.centers div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.92rem}
+.centers b{display:block;margin-bottom:2px}
+.ctxbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.ctxbar .chip{padding:3px 12px;font-size:.88rem}
+
+/* prescriber */
+.rx{margin-top:14px;display:grid;gap:10px}
+.rxcard{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--bg)}
+.rxcard h3{font-size:1.15rem}
+.rxcard ol{margin:8px 0 0;padding-inline-start:22px}
+.rxcard li{margin:3px 0}
+
+/* practice */
+.round{display:grid;gap:14px}
+.phasebar{display:flex;gap:6px;direction:ltr}
+.phasebar i{flex:1;height:6px;border-radius:99px;background:var(--dim);overflow:hidden;position:relative}
+.phasebar i b{position:absolute;inset:0;background:var(--glow);transform-origin:left;transform:scaleX(0)}
+.phaseT{font-family:var(--font-display);font-size:1.5rem;font-weight:600}
+.count{font-variant-numeric:tabular-nums;font-size:2.2rem;font-family:var(--font-display);color:var(--accent)}
+.ringbox{display:grid;place-items:center;height:210px}
+.ring{width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,var(--glow) 0%,var(--glow-soft) 70%);display:grid;place-items:center;font-family:var(--font-display);font-size:1.7rem;font-weight:600;color:#1b2150;transform:scale(.55);box-shadow:0 0 36px var(--glow)}
+
+/* self-check */
+.lk{border-top:1px solid var(--line);padding:12px 0}
+.lk fieldset{border:0;margin:0;padding:0}
+.lk legend{padding:0;margin-bottom:6px}
+.lk .scale{display:flex;flex-wrap:wrap;gap:6px}
+.lk label{border:1px solid var(--line);border-radius:10px;padding:4px 12px;font-size:.9rem;cursor:pointer;background:var(--bg)}
+.lk input{position:absolute;opacity:0;pointer-events:none}
+.lk input:checked + span{font-weight:600;color:var(--accent)}
+.lk label:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.lk label:has(input:focus-visible){outline:3px solid var(--glow);outline-offset:2px}
+.prof{display:grid;gap:12px;margin-top:14px}
+.prof div b{display:flex;justify-content:space-between}
+
+/* tests */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 16px;font-size:.92rem}
+.tabs button[aria-selected="true"]{background:var(--night);color:#fff;border-color:var(--night)}
+:root[data-theme="dark"] .tabs button[aria-selected="true"]{background:var(--glow);color:#1b2150;border-color:var(--glow)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:var(--glow);color:#1b2150;border-color:var(--glow)}}
+.qq{font-family:var(--font-display);font-size:1.3rem;margin-top:4px;line-height:1.4}
+.qopts{display:grid;gap:8px;margin-top:14px}
+.score{font-family:var(--font-display);font-size:2.6rem;color:var(--accent)}
+.missed{margin-top:12px;display:grid;gap:8px}
+.missed div{border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.92rem}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:14px}
+@media (max-width:620px){.pair{grid-template-columns:1fr}}
+.pair .col{display:grid;gap:8px;align-content:start}
+.pair .opt{font-size:.92rem}
+.pair .opt.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:.85}
+.ord{display:grid;gap:8px;margin-top:12px}
+.ord .opt{display:flex;gap:10px;align-items:center}
+.ord .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--dim);display:grid;place-items:center;font-size:.8rem;font-weight:600}
+.ord .opt.done .n{background:var(--ok);color:#fff}
+.ord .opt.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+
+/* flashcards */
+.fc{perspective:900px;margin-top:6px}
+.fcard{min-height:200px;border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:26px;display:grid;place-items:center;text-align:center;width:100%;font:inherit}
+.fcard .t{font-family:var(--font-display);font-size:1.9rem;font-weight:600}
+.fcard .d{font-size:1.08rem;max-width:30em}
+.fcard small{display:block;color:var(--muted);margin-top:10px}
+
+/* tracker */
+.checks{display:grid;gap:8px;margin-top:10px}
+.checks label{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--bg);cursor:pointer}
+.checks input{width:20px;height:20px;accent-color:var(--glow)}
+.grid40{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;margin-top:10px;direction:ltr;max-width:560px}
+.cell{aspect-ratio:1;border-radius:4px;background:color-mix(in srgb,var(--glow) calc(var(--a) * 100%),var(--dim))}
+.cell.today{outline:2px solid var(--ink);outline-offset:1px}
+
+/* journal */
+.field{display:grid;gap:6px;margin-top:12px}
+.field label{font-weight:500;font-size:.92rem}
+input[type=text],textarea,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 12px;width:100%}
+textarea{min-height:96px;resize:vertical}
+.entries{display:grid;gap:10px;margin-top:16px}
+.entry{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--surface)}
+.entry time{font-size:.82rem;color:var(--muted)}
+.entry .ty{font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:0 8px;margin-inline-start:8px}
+.entry b{display:block}
+.entry p{white-space:pre-wrap;margin-top:4px}
+.entry button{margin-top:6px;background:none;border:0;color:var(--bad);padding:0;font-size:.85rem}
+footer{border-top:1px solid var(--line);padding-block:30px 48px;color:var(--muted);font-size:.92rem}
+footer ul{padding-inline-start:20px;margin:10px 0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-act="lang" data-v="en" aria-pressed="true">English</button>
+        <button type="button" data-act="lang" data-v="fa" aria-pressed="false">فارسی</button>
+      </div>
+    </div>
+    <h1 data-s="title"></h1>
+    <p data-s="sub"></p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections"><div class="wrap" id="navbar"></div></nav>
+
+<main class="wrap">
+  <section class="sec" id="s-dash"><div class="sh"><h2 data-s="h_dash"></h2><p data-s="p_dash"></p></div><div class="tiles" id="tiles"></div><div style="margin-top:12px"><button type="button" class="btn ghost" data-act="resetAll" data-s="reset_all"></button></div></section>
+
+  <section class="sec" id="s-learn"><div class="sh"><h2 data-s="h_learn"></h2><p data-s="p_learn"></p></div><div id="lessons"></div></section>
+
+  <section class="sec" id="s-light"><div class="sh"><h2 data-s="h_light"></h2><p data-s="p_light"></p></div>
+    <div class="card"><div class="lightgrid"><div><div class="dots" id="dots" aria-hidden="true"></div><div class="meter" id="meter"></div></div><div><div class="chips" id="chips"></div><div id="work"></div></div></div></div></section>
+
+  <section class="sec" id="s-ladder"><div class="sh"><h2 data-s="h_ladder"></h2><p data-s="p_ladder"></p></div><div class="ladder" id="ladder"></div>
+    <div class="card cross" id="cross"></div></section>
+
+  <section class="sec" id="s-use"><div class="sh"><h2 data-s="h_use"></h2><p data-s="p_use"></p></div><div class="card" id="lab"></div></section>
+
+  <section class="sec" id="s-rx"><div class="sh"><h2 data-s="h_rx"></h2><p data-s="p_rx"></p></div><div class="card"><div class="ctxbar" id="rxchips"></div><div class="rx" id="rx"></div></div></section>
+
+  <section class="sec" id="s-practice"><div class="sh"><h2 data-s="h_practice"></h2><p data-s="p_practice"></p></div>
+    <div class="card round" id="round"></div>
+    <div class="card" id="ham"></div></section>
+
+  <section class="sec" id="s-check"><div class="sh"><h2 data-s="h_check"></h2><p data-s="p_check"></p></div><div class="card" id="assess"></div></section>
+
+  <section class="sec" id="s-tests"><div class="sh"><h2 data-s="h_tests"></h2><p data-s="p_tests"></p></div>
+    <div class="card"><div class="tabs" role="tablist" id="ttabs"></div><div id="tbody"></div></div></section>
+
+  <section class="sec" id="s-cards"><div class="sh"><h2 data-s="h_cards"></h2><p data-s="p_cards"></p></div><div class="card" id="flash"></div></section>
+
+  <section class="sec" id="s-track"><div class="sh"><h2 data-s="h_track"></h2><p data-s="p_track"></p></div><div class="card" id="track"></div></section>
+
+  <section class="sec" id="s-obst"><div class="sh"><h2 data-s="h_obst"></h2><p data-s="p_obst"></p></div><div id="obst"></div></section>
+
+  <section class="sec" id="s-journal"><div class="sh"><h2 data-s="h_journal"></h2><p data-s="p_journal"></p></div>
+    <div class="card">
+      <div class="field"><label for="j-type" data-s="j_type"></label><select id="j-type"></select></div>
+      <div class="field"><label for="j-where" data-s="j_title"></label><input type="text" id="j-where" autocomplete="off"></div>
+      <div class="field"><label for="j-text" data-s="j_text"></label><textarea id="j-text"></textarea></div>
+      <div style="margin-top:12px"><button type="button" class="btn" data-act="jsave" data-s="j_save"></button></div>
+      <p class="small" style="margin-top:8px" data-s="j_priv"></p>
+      <div class="entries" id="entries"></div>
+    </div></section>
+</main>
+
+<footer><div class="wrap">
+  <p data-s="f_caveat"></p>
+  <p style="margin-top:10px" data-s="f_safe"></p>
+  <p style="margin-top:14px;color:var(--ink);font-weight:500" data-s="f_src"></p>
+  <ul id="srclist"></ul>
+</div></footer>
+
+<script>
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let lang=LS.get('poa2-lang')||((navigator.language||'').slice(0,2)==='fa'?'fa':'en');
+if(lang!=='fa')lang='en';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const B=(en,fa)=>({en,fa});
+const L=o=>o[lang];
+const fill=(s,m)=>s.replace(/\{(\w+)\}/g,(_,k)=>m[k]);
+const num=n=>lang==='fa'?Number(n).toLocaleString('fa-IR'):String(n);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------- saved progress ---------- */
+let P={read:{},scen:{},best:0,tfBest:0,flash:{},track:{},assess:null,dis:[],match:0,ord:0};
+try{Object.assign(P,JSON.parse(LS.get('poa2')||'{}'))}catch(e){}
+const save=()=>LS.set('poa2',JSON.stringify(P));
+
+/* ---------- strings ---------- */
+const S={
+title:B('Awakening Consciousness Course','دوره‌ی بیداری کانشسنس'),
+sub:B('Ten lessons, a model you can play with, fifteen real-life situations, a practice guide, four kinds of test, flashcards and a daily tracker. Everything is drawn from the teaching published on glorian.org.','ده درس، یک مدل تعاملی، پانزده موقعیت واقعی زندگی، راهنمای تمرین، چهار نوع آزمون، فلش‌کارت و پیگیر روزانه. همه‌چیز از آموزه‌های منتشرشده در glorian.org گرفته شده است.'),
+h_dash:B('Your progress','پیشرفت شما'),
+p_dash:B('Saved in this browser only. Nothing is sent anywhere.','فقط در همین مرورگر ذخیره می‌شود و جایی ارسال نمی‌شود.'),
+reset_all:B('Reset all progress','پاک کردن همه‌ی پیشرفت'),
+reset_sure:B('Press again to confirm','برای تأیید دوباره بزنید'),
+t_lessons:B('lessons read','درس خوانده‌شده'),t_light:B('free consciousness in the model','کانشسنس آزاد در مدل'),t_scen:B('situations solved','موقعیت حل‌شده'),t_quiz:B('best quiz score','بهترین نمره‌ی آزمون'),t_streak:B('day practice streak','روز پیاپی تمرین'),t_cards:B('flashcards known','فلش‌کارت آموخته'),
+h_learn:B('Ten lessons','ده درس'),
+p_learn:B('Open a lesson, read the key idea and the points, then mark it as read.','یک درس را باز کنید، ایده‌ی کلیدی و نکته‌ها را بخوانید و سپس آن را «خوانده‌شده» کنید.'),
+read:B('Mark as read','علامت «خوانده‌شده»'),readDone:B('Read','خوانده شد'),
+h_light:B('The sleeping light','نور خفته'),
+p_light:B('The teaching says about 3% of consciousness is free and about 97% is bottled up inside the psychological “I”s. Choose an “I” and take it through the three steps to free the light it holds.','طبق آموزه حدود ۳٪ کانشسنس آزاد و حدود ۹۷٪ داخل «من»های روانی محبوس است. یک «من» را انتخاب کنید و با سه گام آن را بشکافید تا نوری که در خود دارد آزاد شود.'),
+meterL:B('free consciousness','کانشسنس آزاد'),
+meterNote:B('From about 4–5% the teaching says direct experience begins.','طبق آموزه، از حدود ۴ تا ۵٪ تجربه‌ی مستقیم آغاز می‌شود.'),
+model:B('A teaching model, not a measurement. The virtue pairings are suggestions for practice.','یک مدل آموزشی است نه اندازه‌گیری. جفت‌شدن فضیلت‌ها پیشنهادی برای تمرین است.'),
+pick:B('Choose an “I” above to begin.','برای شروع یک «من» را بالا انتخاب کنید.'),
+reset:B('Start over','از اول'),doStep:B('Do this step','انجام این گام'),
+done:B('{n} is dissolved. {k} of 100 points of light are now free.','«{n}» حل شد. اکنون {k} نقطه از ۱۰۰ نقطه‌ی نور آزاد است.'),
+h_ladder:B('States, levels and the cross','حالت‌ها، سطح‌ها و صلیب'),
+p_ladder:B('Tap a rung. The author says most people live only in the lower two states; the upper two are unknown to them.','روی یک پله بزنید. نویسنده می‌گوید بیشتر مردم فقط در دو حالت پایین زندگی می‌کنند و دو حالت بالا برایشان ناشناخته است.'),
+cross_t:B('The Level of Being','سطح هستی'),
+cross_x:B('Events of life (birth, marriage, ageing) lie on the horizontal line of time. Your Level of Being is on the vertical line, like a rung on a ladder. The two cross inside you at every moment. The higher level is not in a far future: it is directly above you, here and now. Honest knowledge of your present level comes first.','رویدادهای زندگی (تولد، ازدواج، پیری) روی خط افقی زمان قرار دارند. سطح هستی شما روی خط عمودی است، مثل پله‌ای روی نردبان. این دو در هر لحظه درون شما یکدیگر را قطع می‌کنند. سطح بالاتر در آینده‌ای دور نیست: درست بالای سر شما، همین‌جا و همین‌اکنون است. شناخت صادقانه‌ی سطح فعلی نخستین گام است.'),
+cx_h:B('events in time','رویدادها در زمان'),cx_v:B('level of Being','سطح هستی'),
+h_use:B('Use cases: name the “I” in real life','موارد کاربرد: «من» را در زندگی واقعی نام ببرید'),
+p_use:B('Fifteen everyday situations. Filter by where your life happens, name the “I” that is active, then read the practice that fits.','پانزده موقعیت روزمره. بر اساس جایی که زندگی‌تان می‌گذرد فیلتر کنید، «من»ِ فعال را نام ببرید و سپس تمرین مناسب را بخوانید.'),
+all:B('All','همه'),
+solved:B('Solved: {k} of {n}','حل‌شده: {k} از {n}'),
+observe3:B('Now observe it in three places','حالا آن را در سه جا مشاهده کنید'),
+head:B('Head','سر'),heart:B('Heart','قلب'),body:B('Body','بدن'),
+headQ:B('What thoughts are running?','چه افکاری جریان دارند؟'),heartQ:B('What emotion is present?','چه هیجانی حاضر است؟'),bodyQ:B('Where do you feel it?','آن را کجا حس می‌کنید؟'),
+practiceMove:B('Practice','تمرین'),
+nextScene:B('Next situation','موقعیت بعدی'),
+h_rx:B('Which practice do I need?','کدام تمرین را لازم دارم؟'),
+p_rx:B('Pick what is happening to you right now. The guide gives the steps the teaching suggests.','آنچه همین حالا برایتان رخ می‌دهد را انتخاب کنید. راهنما گام‌هایی را که آموزه پیشنهاد می‌کند نشان می‌دهد.'),
+rxPick:B('Choose a situation above.','یک موقعیت را بالا انتخاب کنید.'),rxLesson:B('Related lesson','درس مرتبط'),
+h_practice:B('Practise now','همین حالا تمرین کنید'),
+p_practice:B('Two guided exercises: a 60-second presence round from the Key of Sol, and a Ham-Sah breathing meditation.','دو تمرین هدایت‌شده: یک دور حضور ۶۰ ثانیه‌ای از «کلید سول» و یک مدیتیشن تنفسی هام-ساه.'),
+start:B('Start round','شروع دور'),stop:B('Stop','توقف'),again:B('Go again','دوباره'),
+roundDone:B('Round complete. The teaching says what you practise awake carries over into sleep.','دور کامل شد. طبق آموزه، آنچه در بیداری تمرین کنید به خواب هم منتقل می‌شود.'),
+roundIdle:B('Four prompts, fifteen seconds each. Press start and look at what is in front of you.','چهار راهنما، هر کدام پانزده ثانیه. شروع را بزنید و به آنچه روبه‌رویتان است نگاه کنید.'),
+secs:B('seconds','ثانیه'),
+ham_t:B('Ham-Sah breathing','نفس هام-ساه'),
+ham_x:B('Sit comfortably, right hand over left, palms up. Inhale slowly through the nose repeating “Ham” in your mind. Exhale quickly through the mouth saying “Sah”. Eyes closed, no thoughts, only the mantra. The text says this reverses the flow of energy from outward to inward.','راحت بنشینید، دست راست روی چپ، کف دست‌ها رو به بالا. آرام از بینی دم بگیرید و در ذهن «هام» را تکرار کنید. سریع از دهان بازدم کنید و «ساه» بگویید. چشم بسته، بدون فکر، فقط مانترا. متن می‌گوید این کار جریان انرژی را از بیرون به درون برمی‌گرداند.'),
+min:B('{m} min','{m} دقیقه'),
+ham_done:B('Done. If fear arose, note it in the journal and analyse the “I” of fear.','تمام شد. اگر ترسی آمد، آن را در دفتر یادداشت کنید و «من»ِ ترس را تحلیل کنید.'),
+inhale:B('Ham','هام'),exhale:B('Sah','ساه'),
+h_check:B('Where am I asleep? A self-check','کجا خواب هستم؟ یک خودسنجی'),
+p_check:B('Twelve statements about daily life. Answer honestly and without excusing yourself. This is an exercise in self-observation, not a test.','دوازده جمله درباره‌ی زندگی روزمره. صادقانه و بدون توجیه پاسخ دهید. این تمرین مشاهده‌ی خود است نه آزمون.'),
+sc1:B('Rarely','به‌ندرت'),sc2:B('Sometimes','گاهی'),sc3:B('Often','اغلب'),sc4:B('Almost always','تقریباً همیشه'),
+showProf:B('Show my profile','نمایش پروفایل من'),needAll:B('Please answer all twelve statements first.','لطفاً ابتدا به هر دوازده جمله پاسخ دهید.'),
+profT:B('Your profile','پروفایل شما'),
+profHint:B('Start with the lowest area. Suggested lesson:','از پایین‌ترین حوزه شروع کنید. درس پیشنهادی:'),
+h_tests:B('Tests','آزمون‌ها'),
+p_tests:B('Four ways to test yourself: a quiz bank, true or false, matching, and putting steps in order.','چهار راه برای سنجش خود: بانک پرسش، درست یا نادرست، جورکردن و ترتیب‌دادن گام‌ها.'),
+tab_quiz:B('Quiz bank','بانک پرسش'),tab_tf:B('True or false','درست یا نادرست'),tab_match:B('Matching','جورکردن'),tab_ord:B('Put in order','ترتیب‌دادن'),
+quizSetup:B('Ten random questions from a bank of 34. Pick a topic or take all of them.','ده پرسش تصادفی از بانک ۳۴ پرسشی. یک موضوع انتخاب کنید یا همه را بگیرید.'),
+qStart:B('Start 10 questions','شروع ۱۰ پرسش'),
+qNum:B('Question {i} of {n}','پرسش {i} از {n}'),qNext:B('Next question','پرسش بعدی'),qSee:B('See result','دیدن نتیجه'),
+qScore:B('You answered {s} of {n} correctly.','به {s} پرسش از {n} پرسش درست پاسخ دادید.'),
+qBest:B('Best score: {b}%','بهترین نمره: {b}٪'),
+qHigh:B('Strong. Re-read the lessons where you slipped, then practise.','عالی. درس‌هایی را که اشتباه کردید دوباره بخوانید و سپس تمرین کنید.'),
+qLow:B('A good start. Work back through the lessons and try again.','شروع خوبی است. درس‌ها را دوباره مرور کنید و دوباره امتحان کنید.'),
+qMissed:B('Questions to review','پرسش‌هایی برای مرور'),qRetry:B('New set','مجموعه‌ی جدید'),
+tfQ:B('Is this statement true or false?','این جمله درست است یا نادرست؟'),tfT:B('True','درست'),tfF:B('False','نادرست'),
+tfEnd:B('You got {s} of {n} right.','به {s} مورد از {n} مورد درست پاسخ دادید.'),tfBest:B('Best: {b} of {n}','بهترین: {b} از {n}'),
+matchIntro:B('Tap a term, then tap its meaning. Correct pairs lock in place.','روی یک اصطلاح بزنید و سپس معنی‌اش را بزنید. جفت‌های درست ثابت می‌شوند.'),
+matchDone:B('All eight matched, with {w} wrong tries.','هر هشت مورد جور شد، با {w} تلاش نادرست.'),
+ordIntro:B('Tap the steps in the order the teaching gives them. Choose a sequence:','گام‌ها را به ترتیبی که آموزه می‌دهد بزنید. یک توالی انتخاب کنید:'),
+ordDone:B('Correct order, with {w} wrong tries.','ترتیب درست، با {w} تلاش نادرست.'),ordReset:B('Shuffle again','دوباره بر بزن'),
+h_cards:B('Flashcards','فلش‌کارت‌ها'),
+p_cards:B('Sixteen key terms. Tap the card to turn it, then say whether you know it.','شانزده اصطلاح کلیدی. روی کارت بزنید تا برگردد و سپس بگویید آن را می‌دانید یا نه.'),
+know:B('I know it','می‌دانم'),again:B('Again','دوباره'),flip:B('Tap to turn','برای برگرداندن بزنید'),
+cardOf:B('Card {i} of {n} · known {k}','کارت {i} از {n} · آموخته {k}'),
+onlyUnknown:B('Only cards I do not know yet','فقط کارت‌هایی که هنوز نمی‌دانم'),
+allKnown:B('You know every card. Turn the filter off to review them.','همه‌ی کارت‌ها را می‌دانید. فیلتر را خاموش کنید تا مرور کنید.'),
+h_track:B('Daily tracker and evening retrospection','پیگیر روزانه و بازنگری شبانه'),
+p_track:B('Tick what you did today. The grid shows the last 40 days. A day counts toward the streak when you tick at least four practices.','آنچه امروز انجام دادید را تیک بزنید. جدول ۴۰ روز اخیر را نشان می‌دهد. روزی که دست‌کم چهار تمرین تیک بخورد در رشته‌ی پیاپی حساب می‌شود.'),
+today:B('Today','امروز'),streak:B('Streak: {n} days','رشته‌ی پیاپی: {n} روز'),
+h_obst:B('Obstacles and remedies','موانع و راه‌حل‌ها'),p_obst:B('Open each obstacle to see what the pages suggest.','هر مانع را باز کنید تا پیشنهاد صفحه‌ها را ببینید.'),
+h_journal:B('Journal','دفتر یادداشت'),
+p_journal:B('Record observations, evening retrospections and dreams. Entries stay in this browser.','مشاهده‌ها، بازنگری‌های شبانه و رویاها را ثبت کنید. یادداشت‌ها در همین مرورگر می‌مانند.'),
+j_type:B('Type','نوع'),j_title:B('Title or place','عنوان یا مکان'),j_text:B('What happened? Which “I” was active? What did you understand?','چه شد؟ کدام «من» فعال بود؟ چه فهمیدید؟'),
+j_save:B('Save entry','ذخیره‌ی یادداشت'),j_priv:B('Entries are private to this browser.','یادداشت‌ها فقط در همین مرورگر هستند.'),
+j_empty:B('No entries yet. Your first one will appear here.','هنوز یادداشتی نیست. اولین یادداشت شما اینجا نمایش داده می‌شود.'),j_del:B('Delete','حذف'),
+f_caveat:B('Everything here is one tradition’s teaching, as published by Glorian. It is not independently verified. The 97% and 3% figures are that tradition’s claim, and the dot model is an illustration. Check any quotation on its page before citing it.','هر آنچه اینجاست آموزه‌ی یک سنت است، آن‌گونه که Glorian منتشر کرده، و مستقل تأیید نشده است. اعداد ۹۷٪ و ۳٪ ادعای همین سنت است و مدل نقطه‌ها فقط یک تصویرسازی است. پیش از ارجاع، هر نقل‌قول را در صفحه‌ی خودش بررسی کنید.'),
+f_safe:B('Go at a pace that suits you. If an experience frightens or unsettles you, stop and talk with your teacher.','با سرعتی پیش بروید که برایتان مناسب است. اگر تجربه‌ای شما را ترساند یا آشفته کرد، متوقف شوید و با استاد خود صحبت کنید.'),
+f_src:B('Pages this course draws on','صفحه‌هایی که این دوره از آن‌ها گرفته شده')
+};
+document.querySelectorAll('[data-s]');
+const NAV=[['s-dash',B('Progress','پیشرفت')],['s-learn',B('Lessons','درس‌ها')],['s-light',B('Light','نور')],['s-ladder',B('Levels','سطح‌ها')],['s-use',B('Use cases','کاربردها')],['s-rx',B('Which practice?','کدام تمرین؟')],['s-practice',B('Practise','تمرین')],['s-check',B('Self-check','خودسنجی')],['s-tests',B('Tests','آزمون‌ها')],['s-cards',B('Flashcards','فلش‌کارت')],['s-track',B('Tracker','پیگیر')],['s-obst',B('Obstacles','موانع')],['s-journal',B('Journal','دفتر')]];
+
+/* ---------- lessons ---------- */
+const G='https://glorian.org';
+const LESSONS=[
+{t:B('What consciousness is','کانشسنس چیست'),k:B('Consciousness is the Essence: the part of you that perceives and understands. It is a form of light.','کانشسنس همان اسنس است: بخشی از شما که درک و فهم می‌کند. شکلی از نور است.'),
+ p:[B('The glossary calls it the foundation of perception and understanding. What we cannot perceive we cannot understand.','واژه‌نامه آن را شالوده‌ی ادراک و فهم می‌نامد. آنچه نتوانیم ادراک کنیم نمی‌توانیم بفهمیم.'),B('It is not the intellect, emotions, brain, body or senses. It uses them as tools.','عقل، هیجان، مغز، بدن یا حواس نیست. از آن‌ها به‌عنوان ابزار استفاده می‌کند.'),B('It can be conditioned: filtered by past experience, trauma, desire, fear and stress, like light through coloured glass.','می‌تواند مشروط شود: با تجربه‌های گذشته، آسیب، میل، ترس و استرس فیلتر می‌شود، مثل نور از شیشه‌ی رنگی.'),B('Its natural growth is small. After early childhood it grows through conscious work and voluntary suffering.','رشد طبیعی آن اندک است. پس از کودکی با کار آگاهانه و رنج ارادی رشد می‌کند.')],
+ s:[['Consciousness (glossary)',G+'/glossary/c/consciousness'],['The Essence, ch. 4',G+'/books/treatise-of-revolutionary-psychology/the-essence']]},
+{t:B('Why consciousness is asleep','چرا کانشسنس خواب است'),k:B('Almost all of it is asleep, and people believe they are awake.','تقریباً همه‌ی آن خواب است و مردم باور دارند بیدارند.'),
+ p:[B('About 3% is free and about 97% is bottled up inside the “I”s, where it sleeps and dreams.','حدود ۳٪ آزاد و حدود ۹۷٪ داخل «من»ها محبوس است، جایی که می‌خوابد و رؤیا می‌بیند.'),B('Identification with events, objects and desires leads to fascination, and fascination puts consciousness to sleep.','همذات‌پنداری با رویدادها، اشیا و امیال به شیفتگی می‌انجامد و شیفتگی کانشسنس را به خواب می‌برد.'),B('Collective hypnosis: people follow fashion, advertising and the crowd without noticing.','هیپنوز جمعی: مردم بی‌آنکه بفهمند مد، تبلیغات و جمع را دنبال می‌کنند.'),B('“Everyone lives dreaming, and what is worse is that nobody believes their consciousness is asleep.”','«همه در رویا زندگی می‌کنند و بدتر اینکه هیچ‌کس باور ندارد کانشسنسش خواب است.»')],
+ s:[['Key of Sol (lecture)',G+'/authors/samael-aun-weor/lectures/key-of-sol'],['The Narrow Way, ch. 11',G+'/books/the-narrow-way/the-consciousness']]},
+{t:B('The many “I”s','«من»های بسیار'),k:B('Each “I” is a partial function that believes it is the whole, so we act like machines.','هر «من» کارکردی جزئی است که خود را کل می‌پندارد، پس مثل ماشین عمل می‌کنیم.'),
+ p:[B('Anger, greed, lust, pride, jealousy and others each act as a separate “I”. They take turns speaking through us.','خشم، طمع، شهوت، غرور، حسادت و دیگران هر کدام «من»ی جداگانه‌اند و به نوبت از زبان ما سخن می‌گویند.'),B('We think we have one will when we have many. “As long as a human being holds onto the illusion that he is one and the same person, he cannot change.”','فکر می‌کنیم یک اراده داریم ولی چندین اراده داریم. «تا زمانی که انسان به این توهم بچسبد که یک شخص واحد است نمی‌تواند تغییر کند.»'),B('Habits are “the mechanical tracks on which circulates the train of our miserable existence”.','عادت‌ها «ریل‌های مکانیکی‌اند که قطار هستی رقت‌بار ما بر آن‌ها می‌گذرد».'),B('Those who think they never act unconsciously are the most stuck.','کسانی که فکر می‌کنند هرگز ناآگاهانه رفتار نمی‌کنند از همه گرفتارترند.')],
+ s:[['Mechanical Creatures',G+'/books/treatise-of-revolutionary-psychology/mechanical-creatures'],['Radical Change',G+'/books/treatise-of-revolutionary-psychology/radical-change']]},
+{t:B('Awakening and the death of the ego','بیداری و مرگ ایگو'),k:B('Awakening grows in proportion to the “I”s that are understood and dissolved.','بیداری به نسبت «من»هایی که فهمیده و حل می‌شوند رشد می‌کند.'),
+ p:[B('To be awake is to be fully present here and now, using consciousness to its full capacity.','بیدار بودن یعنی حضور کامل در اینجا و اکنون و استفاده‌ی کامل از کانشسنس.'),B('“The greater the quantity of disintegrated I’s, the greater the degree of Self-cognizance.”','«هر چه شمار «من»های منحل‌شده بیشتر باشد، درجه‌ی خودشناسی بالاتر است.»'),B('Direct experience begins at around 4–5% awakened consciousness.','تجربه‌ی مستقیم از حدود ۴ تا ۵٪ کانشسنس بیدار آغاز می‌شود.'),B('A newborn is “totally awake”, because only the free 3% is present without the “I”s.','نوزاد «کاملاً بیدار» است، چون فقط ۳٪ آزاد بدون «من»ها حاضر است.')],
+ s:[['Infant’s Self-cognizance',G+'/books/treatise-of-revolutionary-psychology/infants-self-cognizance'],['Direct Experience',G+'/books/hell-the-devil-and-karma/direct-experience']]},
+{t:B('Self-observation','مشاهده‌ی خود'),k:B('An exercise of attention in which you become an indifferent observer of your own psychological process.','تمرینی از توجه که در آن ناظری بی‌تفاوت نسبت به فرایند روانی خود می‌شوید.'),
+ p:[B('It is active and directed. To think about yourself is not to observe yourself.','فعال و هدایت‌شده است. فکر کردن درباره‌ی خود مشاهده‌ی خود نیست.'),B('Split into two roles: the observer and the observed. Thoughts and emotions belong to the observed.','به دو نقش تقسیم شوید: ناظر و مشاهده‌شونده. افکار و هیجان‌ها به مشاهده‌شونده تعلق دارند.'),B('Start on day one in ordinary moments: at home, at meals, in the street, at work.','از روز اول در لحظه‌های عادی شروع کنید: در خانه، سر غذا، در خیابان، در کار.'),B('Use the day’s biggest irritation as a mirror. The faults we see in others exist in us.','بزرگ‌ترین رنجش روز را آینه کنید. عیب‌هایی که در دیگران می‌بینیم در ما هم هست.'),B('Be sincere and severe: observe without justifying, excusing or building theories.','صادق و سخت‌گیر باشید: بدون توجیه، بهانه یا ساختن تئوری مشاهده کنید.')],
+ s:[['Self-observation (glossary)',G+'/glossary/s/self-observation'],['The Observer and the Observed',G+'/books/treatise-of-revolutionary-psychology/the-observer-and-the-observed']]},
+{t:B('Self-remembering and the Key of Sol','خودیادآوری و کلید سول'),k:B('A state of active consciousness, controlled by will, that begins with awareness of being here and now.','حالتی از کانشسنس فعال و تحت کنترل اراده که با آگاهی از بودن در اینجا و اکنون آغاز می‌شود.'),
+ p:[B('Divide attention into three: the subject (yourself), the object (what attracts you) and the place (where you are).','توجه را به سه بخش تقسیم کنید: سوژه (خودتان)، ابژه (آنچه جذبتان می‌کند) و مکان (جایی که هستید).'),B('Ask repeatedly during the day: “Where am I?” The question engraves itself in the subconscious and can arise in sleep.','در طول روز بارها بپرسید: «کجا هستم؟» این پرسش در ناخودآگاه حک می‌شود و می‌تواند در خواب به یادتان بیاید.'),B('Do not become identified with anything you like or are captivated by.','با هیچ چیزی که دوستش دارید یا شیفته‌اش می‌شوید همذات‌پنداری نکنید.'),B('Treat familiar places as if seeing them for the first time.','مکان‌های آشنا را طوری ببینید که انگار برای نخستین بار می‌بینید.')],
+ s:[['Self-remembering (glossary)',G+'/glossary/s/self-remembering'],['Key of Sol (lecture)',G+'/authors/samael-aun-weor/lectures/key-of-sol']]},
+{t:B('Comprehending and dissolving an “I”','درک و حل کردن یک «من»'),k:B('Discover it, comprehend it on every level, then ask for it to be dissolved.','آن را کشف کنید، در همه‌ی سطوح درکش کنید و سپس از حل شدنش بخواهید.'),
+ p:[B('Discovery: defects surface in dealings with others, like a full-length mirror. Finding one is cause for joy.','کشف: عیب‌ها در رابطه با دیگران ظاهر می‌شوند، مثل آینه‌ی قدی. یافتن یکی جای شادی دارد.'),B('Judgment: watch the defect like a film, without condemning or excusing it.','داوری: عیب را مثل فیلم تماشا کنید، بدون محکوم کردن یا توجیه.'),B('Execution: examine it in deep meditation until it is understood on every level of the mind. Then it disintegrates.','اجرا: آن را در مدیتیشن عمیق بررسی کنید تا در همه‌ی سطوح ذهن فهمیده شود. آن‌گاه از هم می‌پاشد.'),B('“The mind alone could not fundamentally alter any defect.” Ask the Divine Mother Kundalini to eliminate it.','«ذهن به‌تنهایی نمی‌تواند هیچ عیبی را ریشه‌ای تغییر دهد.» از مادر الهی کندالینی بخواهید آن را بسوزاند.'),B('Cultivate the opposite virtue: serenity replaces anger, altruism replaces egotism. Review the day each evening.','فضیلت مقابل را بپرورانید: آرامش جای خشم و نوع‌دوستی جای خودخواهی را می‌گیرد. هر شب روز را مرور کنید.')],
+ s:[['The Didactic for the Dissolution of the I',G+'/books/the-revolution-of-the-dialectic/the-didactic-for-the-dissolution-of-the-i'],['The Knowledge of Oneself (lecture)',G+'/authors/samael-aun-weor/lectures/the-knowledge-of-oneself']]},
+{t:B('A way of life','یک شیوه‌ی زندگی'),k:B('The quality of life depends on the inner state in which events are lived.','کیفیت زندگی به حالت درونی‌ای بستگی دارد که رویدادها در آن زیسته می‌شوند.'),
+ p:[B('“The external events are never as important as the way one reacts when facing them.”','«رویدادهای بیرونی هرگز به اندازه‌ی نوع واکنش ما در برابرشان اهمیت ندارند.»'),B('Do not identify with any event. Look at life like a film. Remember that everything passes.','با هیچ رویدادی همذات‌پنداری نکنید. زندگی را مثل فیلم ببینید. به یاد داشته باشید همه‌چیز می‌گذرد.'),B('Pause before reacting to insult or flattery. Transform impressions as they enter.','پیش از واکنش به توهین یا تعریف درنگ کنید. برداشت‌ها را هنگام ورود دگرگون کنید.'),B('Balance the three brains (intellectual, emotional, motor-instinctive-sexual) and conserve energy.','سه مغز (عقلی، عاطفی، حرکتی-غریزی-جنسی) را متعادل کنید و انرژی را حفظ کنید.'),B('Share the work. Inner progress becomes very difficult if you practise but do not give.','کار را با دیگران تقسیم کنید. اگر تمرین کنید ولی ندهید، پیشرفت درونی بسیار دشوار می‌شود.')],
+ s:[['The Internal State',G+'/books/treatise-of-revolutionary-psychology/the-internal-state'],['Personal Events',G+'/books/treatise-of-revolutionary-psychology/personal-events'],['The Three Brains',G+'/books/fundamentals-of-gnostic-education/the-three-brains']]},
+{t:B('Meditation and the Void','مدیتیشن و تهی‌گاه'),k:B('Deep inner meditation can briefly unbottle the Essence and give direct, non-conceptual experience.','مدیتیشن عمیق درونی می‌تواند اسنس را لحظه‌ای رها کند و تجربه‌ی مستقیم و بدون مفهوم بدهد.'),
+ p:[B('Fear is the first obstacle: when the sense of self begins to dissolve, terror can arise. Analyse the “I” of fear and ask the Divine Mother to dissolve it.','ترس نخستین مانع است: وقتی حس «خود» شروع به حل شدن می‌کند ممکن است وحشت بیاید. «من»ِ ترس را تحلیل کنید و از مادر الهی بخواهید آن را حل کند.'),B('The Ham-Sah method reverses the flow of energy from outward to inward.','روش هام-ساه جریان انرژی را از بیرون به درون برمی‌گرداند.'),B('Awareness of time blocks the experience because the ego is itself a form of time. Impatience is another “I”.','آگاهی از زمان تجربه را مسدود می‌کند چون ایگو خودش شکلی از زمان است. بی‌صبری «من» دیگری است.'),B('“The experience of reality can never come to us as long as the consciousness remains embedded within the ego.”','«تجربه‌ی واقعیت هرگز نمی‌آید تا زمانی که کانشسنس در ایگو فرو رفته باشد.»')],
+ s:[['The Conquest of the Illuminating Void',G+'/books/profound-meditation/the-conquest-of-the-illuminating-void'],['Live Wisely by Awakening Consciousness Out of Hypnosis',G+'/books/profound-meditation/live-wisely-by-awakening-consciousness-out-of-hypnosis']]},
+{t:B('Levels of Being','سطح‌های هستی'),k:B('You stand on a rung of a vertical ladder. Knowing your present rung comes before climbing.','شما بر پله‌ای از یک نردبان عمودی ایستاده‌اید. شناخت پله‌ی فعلی پیش از بالا رفتن است.'),
+ p:[B('The Level of Being is not defined by beauty, age or social rank.','سطح هستی با زیبایی، سن یا مقام اجتماعی تعریف نمی‌شود.'),B('The inner state attracts matching outer circumstances. Real social change begins with personal change.','حالت درونی شرایط بیرونی متناسب را جذب می‌کند. تغییر اجتماعی واقعی از تغییر شخصی آغاز می‌شود.'),B('Four states: dream, vigil consciousness, self-cognizance, objective consciousness. Most people live only in the first two.','چهار حالت: رؤیا، کانشسنس بیداری، خودشناسی، کانشسنس عینی. بیشتر مردم فقط در دو حالت نخست زندگی می‌کنند.'),B('“It would be impossible to pass into another level if we ignore the level in which we presently are.”','«اگر سطحی را که اکنون در آن هستیم نادیده بگیریم، گذر به سطحی دیگر ناممکن است.»')],
+ s:[['The Level of Being',G+'/books/treatise-of-revolutionary-psychology/the-level-of-being'],['The Marvelous Ladder',G+'/books/treatise-of-revolutionary-psychology/the-marvelous-ladder']]}
+];
+function renderLessons(){
+  const open=[...document.querySelectorAll('#lessons details')].map(d=>d.open);
+  $('#lessons').innerHTML=LESSONS.map((l,i)=>`<details${open[i]?' open':''}><summary><span class="lnum${P.read[i]?' on':''}">${num(i+1)}</span>${esc(L(l.t))}</summary><div class="dbody"><p class="take">${esc(L(l.k))}</p><ul>${l.p.map(x=>`<li>${esc(L(x))}</li>`).join('')}</ul><div class="row" style="margin-top:10px"><button type="button" class="btn${P.read[i]?' ghost':''}" data-act="read" data-i="${i}">${esc(L(P.read[i]?S.readDone:S.read))}</button></div><p class="src">${l.s.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join(' · ')}</p></div></details>`).join('');
+}
+
+/* ---------- the "I"s and the light model ---------- */
+const IS=[
+{n:B('Anger','خشم'),v:B('Serenity','آرامش')},{n:B('Pride','غرور'),v:B('Humility','فروتنی')},
+{n:B('Greed','طمع'),v:B('Generosity','بخشندگی')},{n:B('Envy','حسادت'),v:B('Gladness for others','شادی برای دیگران')},
+{n:B('Fear','ترس'),v:B('Courage','شجاعت')},{n:B('Vanity','خودنمایی'),v:B('Simplicity','سادگی')},
+{n:B('Laziness','تنبلی'),v:B('Diligence','پشتکار')},{n:B('Impatience','بی‌صبری'),v:B('Patience','صبر')},
+{n:B('Resentment','کینه'),v:B('Forgiveness','بخشش')},{n:B('Jealousy','رشک'),v:B('Trust','اعتماد')}
+];
+const STEPS=[
+{t:B('1. Discover','۱. کشف'),x:B('Catch {n} in action, in a real exchange with someone, not in theory. Finding a defect is a reason for joy, because a defect that is found can be made to die.','«{n}» را در حین عمل بگیرید، در یک رابطه‌ی واقعی با دیگران و نه در تئوری. یافتن یک عیب جای شادی دارد، چون عیبِ کشف‌شده را می‌توان میراند.')},
+{t:B('2. Comprehend','۲. درک'),x:B('Watch it like a film, without excusing or condemning it. In meditation, examine it in head, heart and body until it is understood on every level of the mind.','آن را مثل فیلم نگاه کنید، بدون توجیه و بدون محکوم کردن. در مدیتیشن آن را در سر، قلب و بدن بررسی کنید تا در همه‌ی سطوح ذهن فهمیده شود.')},
+{t:B('3. Dissolve','۳. انحلال'),x:B('The mind alone cannot remove it. Ask the Divine Mother Kundalini to dissolve it, then cultivate the opposite virtue: {v}.','ذهن به‌تنهایی نمی‌تواند آن را بردارد. از مادر الهی کندالینی بخواهید آن را بسوزاند، سپس فضیلت مقابل را بپرورانید: {v}.')}
+];
+const SIZES=[10,10,10,10,10,10,10,10,10,7];
+const owner=new Array(100).fill(-1);
+(function(){const idx=[];for(let i=3;i<100;i++)idx.push(i);let s=11;for(let i=idx.length-1;i>0;i--){s=(s*1103515245+12345)&0x7fffffff;const j=s%(i+1);[idx[i],idx[j]]=[idx[j],idx[i]]}let p=0;SIZES.forEach((z,k)=>{for(let j=0;j<z;j++)owner[idx[p++]]=k})})();
+const light={sel:null,st:0,dis:new Set(P.dis||[])};
+const litCount=()=>{let n=3;light.dis.forEach(k=>n+=SIZES[k]);return n};
+function renderLight(){
+  $('#dots').innerHTML=owner.map(o=>{const lit=o===-1||light.dis.has(o);const sel=o===light.sel&&!lit;return `<i class="dot${lit?' lit':''}${sel?' sel':''}"></i>`}).join('');
+  const n=litCount();
+  $('#meter').innerHTML=`<div><b>${num(n)}%</b> <span class="small">${esc(L(S.meterL))}</span></div><div class="bar"><i style="width:${n}%"></i><u></u></div>${n>=5?`<p class="small" style="margin-top:8px">${esc(L(S.meterNote))}</p>`:''}<p class="small" style="margin-top:8px">${esc(L(S.model))}</p>`;
+  $('#chips').innerHTML=IS.map((x,k)=>`<button type="button" class="chip${light.dis.has(k)?' done':''}" data-act="pickI" data-k="${k}" aria-pressed="${light.sel===k}">${esc(L(x.n))}</button>`).join('');
+  const w=$('#work');
+  if(light.sel===null){w.innerHTML=`<p class="small" style="margin-top:16px">${esc(L(S.pick))}</p>`;return}
+  const I=IS[light.sel],m={n:L(I.n),v:L(I.v)};
+  let h='<div class="steps">';
+  STEPS.forEach((s,i)=>{const open=i<light.st;h+=`<div class="step"><div><b>${esc(L(s.t))}</b></div><div>${open?`<p>${esc(fill(L(s.x),m))}</p>`:(i===light.st&&!light.dis.has(light.sel)?`<button type="button" class="btn" data-act="doStep">${esc(L(S.doStep))}</button>`:'<span class="small">…</span>')}</div></div>`});
+  h+='</div>';
+  if(light.dis.has(light.sel))h+=`<div class="note">${esc(fill(L(S.done),{n:m.n,k:num(litCount())}))}</div>`;
+  h+=`<div style="margin-top:14px"><button type="button" class="btn ghost" data-act="resetLight">${esc(L(S.reset))}</button></div>`;
+  w.innerHTML=h;
+}
+
+/* ---------- ladder + cross ---------- */
+const RUNGS=[
+{n:B('Objective consciousness','کانشسنس عینی'),x:B('The highest state: direct, undistorted perception. The teaching links it to Samadhi and to seeing reality as it is.','بالاترین حالت: ادراک مستقیم و بدون تحریف. آموزه آن را به سامادی و دیدن واقعیت آن‌گونه که هست مربوط می‌داند.'),tag:B('Unknown to most','ناشناخته برای بیشتر مردم')},
+{n:B('Self-cognizance','خودشناسی (آگاهی از خود)'),x:B('Being fully present here and now and aware of yourself. It rises with every “I” that is understood and dissolved.','حضور کامل در اینجا و اکنون و آگاهی از خود. با هر «من» که فهمیده و حل شود بالاتر می‌رود.'),tag:B('Unknown to most','ناشناخته برای بیشتر مردم')},
+{n:B('Vigil (waking) consciousness','کانشسنس بیداری'),x:B('Ordinary waking life. The teaching calls it dream-like, because we are absorbed in events and believe we are awake.','زندگی عادیِ بیداری. آموزه آن را شبیه خواب می‌داند، چون در رویدادها غرق هستیم و فکر می‌کنیم بیداریم.'),tag:B('Where most live','جایی که بیشتر مردم هستند')},
+{n:B('Dream','خواب و رؤیا'),x:B('The state in physical sleep. The ego carries its daytime preoccupations into the inner worlds and keeps dreaming there.','حالت در خواب جسمانی. ایگو دغدغه‌های روزانه را به دنیاهای درون می‌برد و آنجا هم به خواب ادامه می‌دهد.'),tag:B('Where most live','جایی که بیشتر مردم هستند')}
+];
+let openRung=2;
+function renderLadder(){
+  $('#ladder').innerHTML=RUNGS.map((r,i)=>`<div class="rung" data-w="${i+1}" data-open="${openRung===i}"><button type="button" data-act="rung" data-i="${i}" aria-expanded="${openRung===i}"><span class="lvl">${num(4-i)}</span><span class="name">${esc(L(r.n))}</span><span class="tagpill">${esc(L(r.tag))}</span></button>${openRung===i?`<div class="body">${esc(L(r.x))}</div>`:''}</div>`).join('');
+  $('#cross').innerHTML=`<svg viewBox="0 0 220 220" role="img" aria-label="${esc(L(S.cross_t))}"><line x1="20" y1="110" x2="200" y2="110" stroke="var(--ink)" stroke-width="2"/><line x1="110" y1="20" x2="110" y2="200" stroke="var(--accent)" stroke-width="3"/><circle cx="110" cy="110" r="7" fill="var(--glow)"/><text x="200" y="102" text-anchor="end" font-size="11" fill="var(--ink)">${esc(L(S.cx_h))}</text><text x="118" y="30" font-size="11" fill="var(--ink)">${esc(L(S.cx_v))}</text></svg><div><h3>${esc(L(S.cross_t))}</h3><p style="margin-top:8px;color:var(--muted)">${esc(L(S.cross_x))}</p></div>`;
+}
+
+/* ---------- use-case lab ---------- */
+const CTX={work:B('Work','کار'),home:B('Home','خانه'),social:B('Social media','شبکه‌های اجتماعی'),street:B('Street','خیابان'),money:B('Money','پول'),health:B('Health','سلامت'),study:B('Study','تحصیل'),rel:B('Relationships','روابط'),med:B('Meditation','مدیتیشن')};
+const SC=[
+{c:'work',t:B('Your manager criticises your report in front of the team. Your chest tightens and you start rehearsing a defence.','مدیرتان جلوی تیم از گزارش شما انتقاد می‌کند. سینه‌تان تنگ می‌شود و شروع می‌کنید دفاعیه آماده کردن.'),a:1,o:[1,6,2],ok:B('Pride defends the self-image. The teaching says to welcome the unpleasant manifestations of others. Pause, stay as the observer, and ask what is true in the criticism.','غرور از تصویر خود دفاع می‌کند. آموزه می‌گوید رفتارهای ناخوشایند دیگران را با روی باز بپذیرید. درنگ کنید، ناظر بمانید و بپرسید چه چیزی از این انتقاد درست است.'),no:B('Look at what is being protected. Which “I” rushes to defend an image?','ببینید چه چیزی در حال محافظت است. کدام «من» برای دفاع از یک تصویر می‌دود؟')},
+{c:'work',t:B('A colleague is thanked for a project you helped finish. You replay the moment all evening.','از همکاری برای پروژه‌ای که شما هم در تمام کردنش کمک کرده‌اید تشکر می‌شود. تمام شب آن لحظه را مرور می‌کنید.'),a:8,o:[8,4,7],ok:B('Resentment keeps replaying the wound. Do the evening retrospection: number it, comprehend it in head, heart and body, and ask the Divine Mother to dissolve it. Cultivate forgiveness.','کینه زخم را مدام تکرار می‌کند. بازنگری شبانه کنید: آن را شماره بزنید، در سر، قلب و بدن درکش کنید و از مادر الهی بخواهید آن را حل کند. بخشش را بپرورانید.'),no:B('The replaying is the clue. Which “I” keeps a wound alive for hours?','تکرار کردن سرنخ است. کدام «من» ساعت‌ها زخمی را زنده نگه می‌دارد؟')},
+{c:'home',t:B('You are late and your child is slow with shoes. You hear a sharp voice come out of you.','دیرتان شده و فرزندتان در پوشیدن کفش کند است. صدایی تند از خودتان می‌شنوید.'),a:7,o:[3,7,5],ok:B('Impatience is another “I”. The teaching asks you to live in the eternal instant. Take one conscious breath, feel your feet, then act.','بی‌صبری «من» دیگری است. آموزه می‌خواهد در لحظه‌ی ابدی زندگی کنید. یک نفس آگاهانه بکشید، پاهایتان را حس کنید و سپس عمل کنید.'),no:B('Watch the clock and the tone of voice. Which “I” cannot wait?','ساعت و لحن صدا را ببینید. کدام «من» نمی‌تواند صبر کند؟')},
+{c:'home',t:B('It is Saturday. You mean to tidy the house but scroll on your phone instead, saying “later”.','شنبه است. می‌خواهید خانه را مرتب کنید ولی به‌جایش گوشی را ورق می‌زنید و می‌گویید «بعداً».'),a:6,o:[6,0,4],ok:B('Laziness likes the word “later”. Use willpower for the first two minutes only. Start, then observe how the “I” protests.','تنبلی کلمه‌ی «بعداً» را دوست دارد. فقط برای دو دقیقه‌ی اول از اراده استفاده کنید. شروع کنید و ببینید آن «من» چگونه اعتراض می‌کند.'),no:B('Notice what the body wants: comfort. Which “I” argues for it?','ببینید بدن چه می‌خواهد: راحتی. کدام «من» برایش دلیل می‌آورد؟')},
+{c:'social',t:B('You see friends’ holiday photos and feel small. You check their account again an hour later.','عکس‌های تعطیلات دوستان را می‌بینید و احساس کوچکی می‌کنید. یک ساعت بعد دوباره حسابشان را نگاه می‌کنید.'),a:3,o:[3,5,0],ok:B('Envy compares and counts. Put yourself in the other’s place and wish them well. Practise gladness for others.','حسادت مقایسه می‌کند و می‌شمارد. خود را جای او بگذارید و برایش آرزوی خوبی کنید. شادی برای دیگران را بپرورانید.'),no:B('The second look is the clue. Which “I” compares?','نگاه دوم سرنخ است. کدام «من» مقایسه می‌کند؟')},
+{c:'social',t:B('You post a photo and check the likes every few minutes, feeling lifted or let down.','عکسی می‌گذارید و هر چند دقیقه لایک‌ها را نگاه می‌کنید و بالا می‌روید یا پایین می‌آیید.'),a:5,o:[5,4,2],ok:B('Vanity feeds on being seen. Transform the impression when it arrives: reflect on your own smallness, and return to the subject-object-place exercise.','خودنمایی از دیده شدن تغذیه می‌کند. برداشت را هنگام ورود دگرگون کنید: در کوچکی خودتان تأمل کنید و به تمرین سوژه-ابژه-مکان برگردید.'),no:B('Who is waiting for approval? Name that “I”.','چه کسی منتظر تأیید است؟ آن «من» را نام ببرید.')},
+{c:'street',t:B('Someone pushes in front of you in a queue. Heat rises in your face and your thoughts turn harsh.','کسی در صف جلوی شما می‌پرد. گرما به صورتتان می‌آید و افکارتان تند می‌شود.'),a:0,o:[0,6,3],ok:B('Anger took over the centers. You are the observer, the heat and harsh thoughts are the observed. Feel it in head, heart and body before you speak.','خشم مراکز را گرفت. شما ناظرید و گرما و افکار تند مشاهده‌شونده‌اند. پیش از سخن گفتن آن را در سر، قلب و بدن حس کنید.'),no:B('Heat in the face and harsh thoughts point to a different “I”.','گرمای صورت و افکار تند به «من» دیگری اشاره می‌کند.')},
+{c:'money',t:B('A sale ends tonight. You buy things you do not need so as not to miss out.','حراج امشب تمام می‌شود. چیزهایی می‌خرید که لازم ندارید تا از دست ندهید.'),a:2,o:[2,1,7],ok:B('Greed wants more. Pause before the purchase. Ask: who wants this, and for what? Practise generosity.','طمع بیشتر می‌خواهد. پیش از خرید درنگ کنید. بپرسید: چه کسی این را می‌خواهد و برای چه؟ بخشندگی را تمرین کنید.'),no:B('Look at the wish to have more. Which “I” counts what it owns?','به میل داشتن بیشتر نگاه کنید. کدام «من» دارایی‌هایش را می‌شمارد؟')},
+{c:'money',t:B('You avoid opening your bank statement. Your stomach knots whenever you think of it.','از باز کردن صورت‌حساب بانکی طفره می‌روید. هر وقت به آن فکر می‌کنید معده‌تان گره می‌خورد.'),a:4,o:[4,6,1],ok:B('Fear hides in the body. Analyse the “I” of fear, breathe with Ham-Sah, ask the Divine Mother to dissolve it, then open the statement. Cultivate courage.','ترس در بدن پنهان است. «من»ِ ترس را تحلیل کنید، با هام-ساه نفس بکشید، از مادر الهی بخواهید آن را حل کند و سپس صورت‌حساب را باز کنید. شجاعت را بپرورانید.'),no:B('The knot in the stomach is the clue. Which “I” avoids and hides?','گره‌ی معده سرنخ است. کدام «من» می‌گریزد و پنهان می‌شود؟')},
+{c:'health',t:B('An old pain returns and your mind jumps to worst-case stories. You cannot sleep.','دردی قدیمی برمی‌گردد و ذهنتان به بدترین سناریوها می‌پرد. خوابتان نمی‌برد.'),a:4,o:[4,2,5],ok:B('Fear tells stories. Look at life like a film and remember that everything passes. Watch the thoughts as the observed, and use Ham-Sah.','ترس قصه می‌سازد. زندگی را مثل فیلم ببینید و به یاد داشته باشید همه‌چیز می‌گذرد. افکار را مشاهده‌شونده ببینید و از هام-ساه استفاده کنید.'),no:B('The worst-case stories are the clue. Which “I” writes them?','قصه‌های بدترین حالت سرنخ است. کدام «من» آن‌ها را می‌نویسد؟')},
+{c:'study',t:B('You score lower than a classmate and decide the course is pointless.','نمره‌ی شما از هم‌کلاسی‌تان پایین‌تر است و تصمیم می‌گیرید درس بی‌فایده است.'),a:5,o:[5,2,4],ok:B('Wounded vanity blames the course. The teaching says to treat unpleasant circumstances as a psychological gymnasium. Ask what the result can teach you.','خودنمایی زخمی درس را مقصر می‌داند. آموزه می‌گوید شرایط ناخوشایند را باشگاه روانی ببینید. بپرسید این نتیجه چه چیزی می‌تواند به شما بیاموزد.'),no:B('Which “I” needs to look better than others?','کدام «من» باید از دیگران بهتر دیده شود؟')},
+{c:'rel',t:B('Your partner forgot your anniversary. Days later you still bring it up.','همسرتان سالگرد را فراموش کرده. چند روز بعد هنوز آن را پیش می‌کشید.'),a:8,o:[8,6,3],ok:B('Resentment collects old injuries. See the “I” as the observed, put yourself in the other’s position, and choose forgiveness.','کینه آسیب‌های قدیمی را جمع می‌کند. آن «من» را مشاهده‌شونده ببینید، خود را جای او بگذارید و بخشش را برگزینید.'),no:B('Bringing it up again and again is the clue.','دوباره و دوباره پیش کشیدن سرنخ است.')},
+{c:'rel',t:B('Your partner laughs with someone else at a party. You start watching them across the room.','همسرتان در مهمانی با دیگری می‌خندد. از آن سوی اتاق مراقبشان می‌شوید.'),a:9,o:[9,0,5],ok:B('Jealousy watches and suspects. Do not identify with the scene. Name it, feel it in the body, and practise trust.','رشک مراقبت و سوءظن می‌کند. با صحنه همذات‌پنداری نکنید. نامش را ببرید، آن را در بدن حس کنید و اعتماد را تمرین کنید.'),no:B('Watching and suspecting are the clues.','مراقبت و سوءظن سرنخ‌هاست.')},
+{c:'med',t:B('During meditation you keep checking the clock and feel annoyed that nothing happens.','هنگام مدیتیشن مدام ساعت را نگاه می‌کنید و از اینکه چیزی رخ نمی‌دهد آزرده‌اید.'),a:7,o:[7,1,8],ok:B('The ego is a form of time, so watching the clock blocks the experience. Impatience is another “I” to understand. Return to Ham-Sah.','ایگو شکلی از زمان است، پس نگاه به ساعت تجربه را مسدود می‌کند. بی‌صبری «من» دیگری است که باید درک شود. به هام-ساه برگردید.'),no:B('Clock-watching is the clue.','نگاه کردن به ساعت سرنخ است.')},
+{c:'work',t:B('A deadline is moved up. You feel your pulse quicken and imagine everything going wrong.','موعد تحویل جلو می‌افتد. ضربان قلبتان تند می‌شود و همه‌چیز را خراب‌شده تصور می‌کنید.'),a:4,o:[4,2,6],ok:B('Fear again, in another costume. Use the pause: feel the feet, breathe, observe the thoughts as film, then choose the first small action.','باز هم ترس، با لباسی دیگر. از درنگ استفاده کنید: پاها را حس کنید، نفس بکشید، افکار را مثل فیلم ببینید و سپس اولین عمل کوچک را برگزینید.'),no:B('Pulse and imagined disaster point to one “I”.','ضربان و فاجعه‌ی تصوری به یک «من» اشاره می‌کند.')}
+];
+const lab={ctx:'all',i:0,pick:null,ok:false};
+function labList(){return SC.map((s,i)=>({s,i})).filter(x=>lab.ctx==='all'||x.s.c===lab.ctx)}
+function renderLab(){
+  const list=labList();
+  if(!list.some(x=>x.i===lab.i)){lab.i=list[0].i;lab.pick=null;lab.ok=false}
+  const s=SC[lab.i];
+  const solvedN=Object.keys(P.scen).length;
+  let h=`<div class="ctxbar">${['all',...Object.keys(CTX)].map(k=>`<button type="button" class="chip" data-act="ctx" data-k="${k}" aria-pressed="${lab.ctx===k}">${esc(L(k==='all'?S.all:CTX[k]))}</button>`).join('')}</div>`;
+  h+=`<div class="qn">${esc(L(CTX[s.c]))} · ${esc(fill(L(S.solved),{k:num(solvedN),n:num(SC.length)}))}</div><p class="scene" style="margin-top:6px">${esc(L(s.t))}</p><div class="opts">`;
+  shufOpts(s).forEach(k=>{let c='opt';if(lab.pick===k)c+=(k===s.a?' right':' wrong');h+=`<button type="button" class="${c}" data-act="labPick" data-k="${k}" ${lab.ok?'disabled':''}>${esc(L(IS[k].n))}</button>`});
+  h+='</div>';
+  if(lab.pick!==null)h+=`<div class="fb ${lab.ok?'ok':'no'}" aria-live="polite">${lab.ok?`<b>${esc(L(S.practiceMove))}.</b> `:''}${esc(L(lab.ok?s.ok:s.no))}</div>`;
+  if(lab.ok){
+    h+=`<p style="margin-top:14px;font-weight:500">${esc(L(S.observe3))}</p><div class="centers"><div><b>${esc(L(S.head))}</b>${esc(L(S.headQ))}</div><div><b>${esc(L(S.heart))}</b>${esc(L(S.heartQ))}</div><div><b>${esc(L(S.body))}</b>${esc(L(S.bodyQ))}</div></div><div style="margin-top:12px"><button type="button" class="btn" data-act="labNext">${esc(L(S.nextScene))}</button></div>`;
+  }
+  $('#lab').innerHTML=h;
+}
+const optOrder={};
+function shufOpts(s){const k=SC.indexOf(s);if(!optOrder[k])optOrder[k]=shuf(s.o);return optOrder[k]}
+
+/* ---------- practice prescriber ---------- */
+const RX=[
+{k:B('I just reacted badly','همین الان بد واکنش نشان دادم'),st:[B('Stop. Do not justify. Name the “I” that acted.','بایستید. توجیه نکنید. «من»ی را که عمل کرد نام ببرید.'),B('Observe where it lives in head, heart and body.','ببینید در سر، قلب و بدن کجا حضور دارد.'),B('Tonight, number it in your retrospection and meditate until you comprehend it.','امشب در بازنگری آن را شماره بزنید و تا درک کامل مدیتیشن کنید.'),B('Ask the Divine Mother Kundalini to dissolve it and picture the opposite virtue.','از مادر الهی کندالینی بخواهید آن را حل کند و فضیلت مقابل را مجسم کنید.')],l:6},
+{k:B('My mind keeps looping on something','ذهنم روی چیزی می‌چرخد'),st:[B('Step back into the observer. The thoughts belong to the observed.','به جایگاه ناظر برگردید. افکار به مشاهده‌شونده تعلق دارند.'),B('Look at the scene like a film. Remember that everything passes.','صحنه را مثل فیلم ببینید. به یاد داشته باشید همه‌چیز می‌گذرد.'),B('Sit for a few minutes of Ham-Sah, allowing only the mantra.','چند دقیقه هام-ساه بنشینید و فقط مانترا را بپذیرید.')],l:7},
+{k:B('I feel flat and on autopilot','حس می‌کنم بی‌حال و مکانیکی‌ام'),st:[B('Do the 60-second round: subject, object, place.','دور ۶۰ ثانیه‌ای را انجام دهید: سوژه، ابژه، مکان.'),B('Ask “Where am I?” and look at the room as if for the first time.','بپرسید «کجا هستم؟» و اتاق را طوری ببینید که انگار نخستین بار است.'),B('Repeat at each doorway through the day.','در هر آستانه‌ی روز تکرار کنید.')],l:5},
+{k:B('I am anxious or afraid','مضطرب یا ترسیده‌ام'),st:[B('Breathe with Ham-Sah for a few minutes.','چند دقیقه با هام-ساه نفس بکشید.'),B('Analyse the “I” of fear: where does it sit in the body, what does it say?','«من»ِ ترس را تحلیل کنید: در بدن کجاست و چه می‌گوید؟'),B('Ask the Divine Mother to dissolve it. Cultivate courage.','از مادر الهی بخواهید آن را حل کند. شجاعت را بپرورانید.')],l:8},
+{k:B('I dislike someone instantly','فوراً از کسی بدم می‌آید'),st:[B('Take the instant dislike as a sign of sleeping consciousness.','بدآمدن ناگهانی را نشانه‌ی خواب بودن کانشسنس بدانید.'),B('Meditate on the person and imagine occupying their place.','روی آن شخص مدیتیشن کنید و تصور کنید جای او هستید.'),B('Ask: “This is me. What am I doing?” The faults we see in others exist in us.','بپرسید: «این منم. چه می‌کنم؟» عیب‌هایی که در دیگران می‌بینیم در ما هم هست.')],l:4},
+{k:B('I am praised or flattered','تعریفم می‌کنند'),st:[B('Notice the glow as it arrives.','گرمی لذت را هنگام ورود ببینید.'),B('Transform the impression: reflect on your own insignificance to defuse vanity.','برداشت را دگرگون کنید: در ناچیز بودن خودتان تأمل کنید تا خودنمایی بی‌اثر شود.'),B('Do not identify with the scene. Return to the subject-object-place exercise.','با صحنه همذات‌پنداری نکنید. به تمرین سوژه-ابژه-مکان برگردید.')],l:7},
+{k:B('I understand the theory but nothing changes','تئوری را می‌فهمم ولی چیزی تغییر نمی‌کند'),st:[B('Remember: knowledge is of the mind, comprehension is of the heart.','به یاد آورید: دانش از آنِ ذهن است و درک از آنِ قلب.'),B('Pick one “I” you saw today and take it through discover, comprehend, dissolve.','یک «من» را که امروز دیدید برگزینید و با کشف، درک و انحلال پیش ببرید.'),B('Meditate until it is understood in head, heart and body, then pray.','مدیتیشن کنید تا در سر، قلب و بدن فهمیده شود و سپس دعا کنید.')],l:6},
+{k:B('I feel stuck in my practice','حس می‌کنم تمرینم متوقف شده'),st:[B('Share what you have learned with someone. Practice without giving stalls.','آنچه آموخته‌اید را با کسی در میان بگذارید. تمرین بدون بخشیدن متوقف می‌شود.'),B('Conserve energy: sleep, calm, no waste. Balance the three brains with exercise, music, art and rest.','انرژی را حفظ کنید: خواب، آرامش، بدون هدر دادن. سه مغز را با ورزش، موسیقی، هنر و استراحت متعادل کنید.'),B('Be patient. Progress is slow and cannot be bought or rushed.','صبور باشید. پیشرفت کند است و نه خریدنی است نه شتاب‌پذیر.')],l:8}
+];
+let rxSel=null;
+function renderRx(){
+  $('#rxchips').innerHTML=RX.map((r,i)=>`<button type="button" class="chip" data-act="rxpick" data-i="${i}" aria-pressed="${rxSel===i}">${esc(L(r.k))}</button>`).join('');
+  if(rxSel===null){$('#rx').innerHTML=`<p class="small">${esc(L(S.rxPick))}</p>`;return}
+  const r=RX[rxSel];
+  $('#rx').innerHTML=`<div class="rxcard"><h3>${esc(L(r.k))}</h3><ol>${r.st.map(x=>`<li>${esc(L(x))}</li>`).join('')}</ol><p class="small" style="margin-top:8px">${esc(L(S.rxLesson))}: ${esc(num(r.l+1))}. ${esc(L(LESSONS[r.l].t))}</p></div>`;
+}
+
+/* ---------- presence round + Ham-Sah ---------- */
+const PH=[
+{t:B('Subject: yourself','سوژه: خودتان'),x:B('Remember yourself. Feel your body, your breath and the thoughts and emotions present right now.','خود را به یاد بیاورید. بدن، نفس و افکار و هیجان‌هایی را که همین حالا هستند حس کنید.')},
+{t:B('Object: what attracts you','ابژه: آنچه جذبتان می‌کند'),x:B('Notice what draws your eye: a window, a screen, an object. Look closely without being absorbed.','ببینید چه چیزی نگاهتان را می‌کشد: یک پنجره، یک صفحه، یک شیء. دقیق نگاه کنید ولی در آن غرق نشوید.')},
+{t:B('Place: where you are','مکان: جایی که هستید'),x:B('Observe the place: ceiling, walls, floor, what is behind you. Ask: why am I here, in this place?','مکان را ببینید: سقف، دیوارها، کف و آنچه پشت سر شماست. بپرسید: چرا اینجا، در این مکان هستم؟')},
+{t:B('Where am I?','کجا هستم؟'),x:B('Ask: am I in the physical world or the astral? The question engraves itself in the subconscious and can arise in sleep.','بپرسید: در دنیای فیزیکی هستم یا آسترال؟ این پرسش در ناخودآگاه حک می‌شود و می‌تواند در خواب به یادتان بیاید.')}
+];
+const rd={on:false,ph:0,left:15,fin:false,tm:null};
+function renderRound(){
+  let h='';
+  if(rd.on){const p=PH[rd.ph];h=`<div class="phasebar" aria-hidden="true">${PH.map((_,i)=>`<i><b style="transform:scaleX(${i<rd.ph?1:i===rd.ph?(15-rd.left)/15:0})"></b></i>`).join('')}</div><div class="phaseT">${esc(L(p.t))}</div><p>${esc(L(p.x))}</p><div class="count">${num(rd.left)} <span class="small">${esc(L(S.secs))}</span></div><div><button type="button" class="btn ghost" data-act="roundStop">${esc(L(S.stop))}</button></div>`}
+  else if(rd.fin)h=`<div class="note" style="margin:0">${esc(L(S.roundDone))}</div><div><button type="button" class="btn" data-act="roundGo">${esc(L(S.again))}</button></div>`;
+  else h=`<p>${esc(L(S.roundIdle))}</p><div><button type="button" class="btn" data-act="roundGo">${esc(L(S.start))}</button></div>`;
+  $('#round').innerHTML=h;
+}
+function roundTick(){rd.left--;if(rd.left<=0){rd.ph++;rd.left=15;if(rd.ph>=PH.length){clearInterval(rd.tm);rd.on=false;rd.fin=true;rd.ph=0}}renderRound()}
+const hm={on:false,left:0,t:0,fin:false,tm:null};
+function renderHam(){
+  let h=`<h3>${esc(L(S.ham_t))}</h3><p class="small" style="margin-top:6px">${esc(L(S.ham_x))}</p>`;
+  if(hm.on){h+=`<div class="ringbox" aria-hidden="true"><div class="ring" id="hring"><span id="hlab">${esc(L(S.inhale))}</span></div></div><div class="count" id="htime" style="text-align:center">${fmt(hm.left)}</div><div style="text-align:center;margin-top:8px"><button type="button" class="btn ghost" data-act="hamStop">${esc(L(S.stop))}</button></div>`}
+  else{if(hm.fin)h+=`<div class="note">${esc(L(S.ham_done))}</div>`;h+=`<div class="row" style="margin-top:12px">${[3,5,10].map(m=>`<button type="button" class="btn" data-act="hamGo" data-m="${m}">${esc(fill(L(S.min),{m:num(m)}))}</button>`).join('')}</div>`}
+  $('#ham').innerHTML=h;
+  if(hm.on)hamPhase();
+}
+const fmt=s=>{const m=Math.floor(s/60),r=s%60;return num(m)+':'+(lang==='fa'?(r<10?'۰':'')+num(r):String(r).padStart(2,'0'))};
+function hamPhase(){
+  const ring=$('#hring'),lab=$('#hlab');if(!ring)return;
+  const inh=(hm.t%8)<6;
+  lab.textContent=L(inh?S.inhale:S.exhale);
+  ring.style.transition=`transform ${inh?6:2}s linear`;
+  requestAnimationFrame(()=>{ring.style.transform=`scale(${inh?1:.55})`});
+}
+function hamTick(){
+  hm.left--;hm.t++;
+  if(hm.left<=0){clearInterval(hm.tm);hm.on=false;hm.fin=true;renderHam();return}
+  const el=$('#htime');if(el)el.textContent=fmt(hm.left);
+  if(hm.t%8===0||hm.t%8===6)hamPhase();
+}
+
+/* ---------- self-check ---------- */
+const AREAS=[
+{n:B('Presence','حضور'),l:5},{n:B('Observation','مشاهده'),l:4},{n:B('Reaction','واکنش'),l:7},{n:B('Way of life','شیوه‌ی زندگی'),l:7}
+];
+const AQ=[
+B('During the day I remember where I am and what I am doing.','در طول روز به یاد دارم کجا هستم و چه می‌کنم.'),
+B('I can feel my body and breath while talking with others.','هنگام صحبت با دیگران بدن و نفسم را حس می‌کنم.'),
+B('I notice when I am lost in a screen, an object or a place.','متوجه می‌شوم کی در یک صفحه، شیء یا مکان گم شده‌ام.'),
+B('I can name which emotion or “I” is active as it appears.','می‌توانم هنگام ظهور بگویم کدام هیجان یا «من» فعال است.'),
+B('I observe myself without excusing or condemning.','خودم را بدون توجیه و بدون محکوم کردن مشاهده می‌کنم.'),
+B('In the evening I review my day.','شب روزم را مرور می‌کنم.'),
+B('I pause before reacting to insult or praise.','پیش از واکنش به توهین یا تعریف درنگ می‌کنم.'),
+B('I feel anger rising before it takes over.','خشم را پیش از اینکه مرا بگیرد در حال بالا آمدن حس می‌کنم.'),
+B('I can look at a problem like watching a film.','می‌توانم به یک مشکل مثل تماشای فیلم نگاه کنم.'),
+B('I treat unpleasant situations as training.','موقعیت‌های ناخوشایند را تمرین می‌دانم.'),
+B('I protect my energy: sleep, calm, no waste.','از انرژی‌ام محافظت می‌کنم: خواب، آرامش، بدون هدر دادن.'),
+B('I share what I learn with others.','آنچه می‌آموزم را با دیگران در میان می‌گذارم.')
+];
+function renderAssess(){
+  const v=(P.assess&&P.assess.v)||[];
+  let h=AQ.map((q,i)=>`<div class="lk"><fieldset><legend>${esc(num(i+1))}. ${esc(L(q))}</legend><div class="scale">${[1,2,3,4].map(n=>`<label><input type="radio" name="a${i}" value="${n}" ${v[i]===n?'checked':''}><span>${esc(L(S['sc'+n]))}</span></label>`).join('')}</div></fieldset></div>`).join('');
+  h+=`<div style="margin-top:14px"><button type="button" class="btn" data-act="prof">${esc(L(S.showProf))}</button></div><div id="profbox" aria-live="polite"></div>`;
+  $('#assess').innerHTML=h;
+  if(P.assess&&P.assess.shown)showProf();
+}
+function showProf(){
+  const v=(P.assess&&P.assess.v)||[];
+  if(AQ.some((_,i)=>!v[i])){$('#profbox').innerHTML=`<div class="fb no">${esc(L(S.needAll))}</div>`;return}
+  const sc=AREAS.map((a,k)=>{const s=v.slice(k*3,k*3+3).reduce((x,y)=>x+y,0);return Math.round((s-3)/9*100)});
+  const low=sc.indexOf(Math.min(...sc));
+  $('#profbox').innerHTML=`<div class="prof" style="margin-top:14px"><h3>${esc(L(S.profT))}</h3>${AREAS.map((a,k)=>`<div><b><span>${esc(L(a.n))}</span><span>${num(sc[k])}%</span></b><div class="mini"><i style="width:${sc[k]}%"></i></div></div>`).join('')}</div><div class="note">${esc(L(S.profHint))} ${esc(num(AREAS[low].l+1))}. ${esc(L(LESSONS[AREAS[low].l].t))}</div>`;
+}
+
+/* ---------- tests ---------- */
+const QT={cons:B('Consciousness','کانشسنس'),sleep:B('Sleep','خواب'),ego:B('The “I”s','«من»ها'),aw:B('Awakening','بیداری'),obs:B('Observation','مشاهده'),rem:B('Remembering','یادآوری'),diss:B('Dissolving','انحلال'),life:B('Way of life','شیوه‌ی زندگی'),med:B('Meditation','مدیتیشن'),level:B('Level of Being','سطح هستی')};
+const Qn=(t,q,o,w)=>({t,q,o,w});
+const QB=[
+Qn('cons',B('Which is NOT how the glossary describes consciousness?','کدام یک توصیف واژه‌نامه از کانشسنس نیست؟'),[B('The same as the brain','همان مغز'),B('A form of light','شکلی از نور'),B('The foundation of perception and understanding','شالوده‌ی ادراک و فهم')],B('Consciousness is not the intellect, emotions, brain, body or senses. It uses them as tools.','کانشسنس عقل، هیجان، مغز، بدن یا حواس نیست و از آن‌ها به‌عنوان ابزار استفاده می‌کند.')),
+Qn('cons',B('What is the Essence?','اسنس چیست؟'),[B('Our consciousness, which remains constant through change','کانشسنس ما که در دگرگونی‌ها ثابت می‌ماند'),B('Our personality','شخصیت ما'),B('Our social role','نقش اجتماعی ما')],B('In Gnosis, “the term essence refers to our consciousness”.','در گنوسیس «اصطلاح اسنس به کانشسنس ما اشاره دارد».')),
+Qn('cons',B('What is conditioned consciousness?','کانشسنس مشروط چیست؟'),[B('Perception filtered by past experience, fear, desire and stress','ادراکی که با تجربه‌ی گذشته، ترس، میل و استرس فیلتر شده'),B('Consciousness that has been switched off','کانشسنسی که خاموش شده'),B('Consciousness trained at school','کانشسنسی که در مدرسه پرورش یافته')],B('Like light through coloured glass, perception is shaped without our knowing.','مثل نور از شیشه‌ی رنگی، ادراک بی‌آنکه بدانیم شکل می‌گیرد.')),
+Qn('cons',B('After early childhood, how does the Essence grow?','پس از کودکی اسنس چگونه رشد می‌کند؟'),[B('Through conscious work and voluntary suffering','با کار آگاهانه و رنج ارادی'),B('Automatically with age','خودبه‌خود با سن'),B('Through professional training','با آموزش حرفه‌ای')],B('Treatise ch. 4: growth is not automatic after the first years.','رساله‌ی روان‌شناسی انقلابی، فصل ۴: رشد پس از سال‌های نخست خودکار نیست.')),
+Qn('sleep',B('What does “97% bottled up” refer to?','«۹۷٪ محبوس» به چه اشاره دارد؟'),[B('Consciousness held inside the psychological “I”s','کانشسنسی که داخل «من»های روانی نگه داشته شده'),B('Memory stored in the brain','حافظه‌ی ذخیره‌شده در مغز'),B('Energy lost in sleep','انرژی از دست‌رفته در خواب')],B('About 3% is free; the rest is imprisoned in the “I”s.','حدود ۳٪ آزاد است و بقیه در «من»ها زندانی است.')),
+Qn('sleep',B('According to The Perfect Matrimony, what causes humanity’s profound sleep?','طبق «ازدواج کامل» چه چیزی باعث خواب عمیق بشریت است؟'),[B('Fascination','شیفتگی'),B('Physical tiredness','خستگی جسمانی'),B('Too much study','مطالعه‌ی زیاد')],B('People are absorbed in desires, work, pleasures and attachments and forget themselves.','مردم در امیال، کار، لذت‌ها و دلبستگی‌ها غرق می‌شوند و خود را فراموش می‌کنند.')),
+Qn('sleep',B('Which is an example of collective hypnosis?','کدام نمونه‌ی هیپنوز جمعی است؟'),[B('Following fashion and advertising without noticing','دنبال کردن مد و تبلیغات بی‌آنکه متوجه شویم'),B('Reading a book alone','تنها کتاب خواندن'),B('Practising meditation','تمرین مدیتیشن')],B('People react automatically to insults, praise and social pressure.','مردم به توهین، تعریف و فشار اجتماعی به‌طور خودکار واکنش نشان می‌دهند.')),
+Qn('sleep',B('What is the central obstacle named across the pages?','مانع اصلی که در صفحه‌ها آمده کدام است؟'),[B('Believing you are already awake or already “one”','باور به اینکه از قبل بیدار یا «یکی» هستید'),B('Being too busy','بیش از حد مشغول بودن'),B('Being too old','پیر بودن')],B('“What is most grave in this matter is that all of them believe that they are awake.”','«وخیم‌ترین نکته این است که همه‌ی آن‌ها باور دارند بیدارند.»')),
+Qn('ego',B('Each “I” is…','هر «من»…'),[B('a partial psychological function that believes it is the whole','کارکردی روانی و جزئی است که خود را کل می‌پندارد'),B('a separate person living in you','شخصی جدا که در شما زندگی می‌کند'),B('a physical organ','عضوی جسمانی است')],B('They are not coordinated, so we act like machines without individuality.','هماهنگ نیستند، پس مثل ماشین و بدون فردیت عمل می‌کنیم.')),
+Qn('ego',B('Habits are described as…','عادت‌ها چگونه توصیف شده‌اند؟'),[B('mechanical tracks on which our existence runs','ریل‌های مکانیکی که هستی ما بر آن‌ها می‌گذرد'),B('gifts of nature','هدیه‌های طبیعت'),B('signs of awakening','نشانه‌های بیداری')],B('Without self-observation we cannot see the repetition.','بدون مشاهده‌ی خود نمی‌توانیم تکرار را ببینیم.')),
+Qn('ego',B('What blocks change, according to Treatise ch. 12?','طبق فصل ۱۲ رساله چه چیزی مانع تغییر است؟'),[B('The illusion of being one and the same person','توهم یک شخص واحد بودن'),B('Lack of money','کمبود پول'),B('Too many books','کتاب‌های بسیار')],B('“As long as a human being holds onto the illusion… he cannot change.”','«تا زمانی که انسان به توهم… بچسبد نمی‌تواند تغییر کند.»')),
+Qn('aw',B('To be awake means…','بیدار بودن یعنی…'),[B('being fully present here and now','حضور کامل در اینجا و اکنون'),B('having no thoughts','نداشتن فکر'),B('feeling excited','هیجان‌زده بودن')],B('Glossary: “fully present in the here and now, using consciousness to its full capacity”.','واژه‌نامه: «حضور کامل در اینجا و اکنون و استفاده‌ی کامل از کانشسنس».')),
+Qn('aw',B('“The greater the quantity of disintegrated I’s, the greater the degree of…”','«هر چه شمار «من»های منحل‌شده بیشتر باشد، درجه‌ی… بالاتر است.»'),[B('Self-cognizance','خودشناسی'),B('Wealth','ثروت'),B('Knowledge of books','دانش کتابی')],B('Treatise ch. 26.','رساله، فصل ۲۶.')),
+Qn('aw',B('At about what level of awakened consciousness does direct experience begin?','تجربه‌ی مستقیم از حدود چه درصدی از کانشسنس بیدار آغاز می‌شود؟'),[B('4–5%','۴ تا ۵٪'),B('50%','۵۰٪'),B('100%','۱۰۰٪')],B('Hell, the Devil and Karma ch. 25.','جهنم، شیطان و کارما، فصل ۲۵.')),
+Qn('aw',B('Why does a newborn see adults as they are?','چرا نوزاد بزرگسالان را آن‌گونه که هستند می‌بیند؟'),[B('Only the free 3% of Essence is present, without the “I”s','فقط ۳٪ آزاد اسنس بدون «من»ها حاضر است'),B('Babies are clairvoyant by nature','نوزادان ذاتاً غیب‌بین‌اند'),B('They have studied people','آن‌ها مردم را مطالعه کرده‌اند')],B('This is used to illustrate awakened consciousness and why it fades as the “I”s enter.','این برای نشان دادن کانشسنس بیدار و دلیل محو شدنش با ورود «من»ها به کار می‌رود.')),
+Qn('obs',B('Which best describes self-observation?','کدام مشاهده‌ی خود را بهتر توصیف می‌کند؟'),[B('Directed attention that separates observer from observed','توجه هدایت‌شده که ناظر را از مشاهده‌شونده جدا می‌کند'),B('Thinking about yourself and your problems','فکر کردن درباره‌ی خود و مشکلاتتان'),B('Suppressing unpleasant feelings','سرکوب احساسات ناخوشایند')],B('To think about yourself and to observe yourself are different.','فکر کردن به خود با مشاهده‌ی خود فرق دارد.')),
+Qn('obs',B('Thoughts and emotions belong to…','افکار و هیجان‌ها به… تعلق دارند.'),[B('the observed','مشاهده‌شونده'),B('the observer','ناظر'),B('neither','هیچ‌کدام')],B('Dynamic attention comes from the observer.','توجه پویا از ناظر می‌آید.')),
+Qn('obs',B('When should you begin observing yourself?','چه زمانی باید مشاهده‌ی خود را آغاز کنید؟'),[B('From day one, in ordinary moments','از روز اول، در لحظه‌های عادی'),B('Only in a retreat','فقط در انزوا'),B('Only after years of study','فقط پس از سال‌ها مطالعه')],B('At home, at meals, in the street, at work.','در خانه، سر غذا، در خیابان، در کار.')),
+Qn('obs',B('The faults we see in others…','عیب‌هایی که در دیگران می‌بینیم…'),[B('exist in us as well','در ما هم هست'),B('are never ours','هرگز از آنِ ما نیست'),B('do not matter','اهمیتی ندارد')],B('“We need to know ourselves before we can know others.”','«پیش از شناخت دیگران باید خود را بشناسیم.»')),
+Qn('obs',B('What does an instant dislike of a stranger signal?','بدآمدن ناگهانی از یک غریبه نشانه‌ی چیست؟'),[B('Sleeping consciousness','خواب بودن کانشسنس'),B('Good intuition','شهود خوب'),B('That the stranger is bad','بد بودن آن غریبه')],B('Meditate on the person and imagine occupying their place.','روی آن شخص مدیتیشن کنید و تصور کنید جای او هستید.')),
+Qn('rem',B('The Key of Sol divides attention into…','کلید سول توجه را به… تقسیم می‌کند.'),[B('subject, object and place','سوژه، ابژه و مکان'),B('past, present and future','گذشته، حال و آینده'),B('head, heart and body','سر، قلب و بدن')],B('Remember yourself, notice what attracts you, observe the place.','خود را به یاد آورید، آنچه جذبتان می‌کند را ببینید، مکان را مشاهده کنید.')),
+Qn('rem',B('Which question is asked repeatedly during the day?','کدام پرسش در طول روز بارها پرسیده می‌شود؟'),[B('“Where am I?”','«کجا هستم؟»'),B('“What is for dinner?”','«شام چیست؟»'),B('“Who is winning?”','«چه کسی می‌برد؟»')],B('It engraves itself in the subconscious and can arise in sleep.','در ناخودآگاه حک می‌شود و می‌تواند در خواب به یادتان بیاید.')),
+Qn('rem',B('Identification leads to…','همذات‌پنداری به… می‌انجامد.'),[B('fascination, which puts consciousness to sleep','شیفتگی که کانشسنس را به خواب می‌برد'),B('freedom','آزادی'),B('better memory','حافظه‌ی بهتر')],B('Key of Sol lecture.','سخنرانی کلید سول.')),
+Qn('diss',B('What are the three steps in the Didactic, as read in these notes?','سه گام در «دیداکتیک» طبق این یادداشت‌ها کدام‌اند؟'),[B('Discovery, judgment (comprehension), execution','کشف، داوری (درک)، اجرا'),B('Hope, belief, reward','امید، باور، پاداش'),B('Fast, pray, sleep','روزه، دعا، خواب')],B('This labelling is the reader’s interpretation of the chapter.','این نام‌گذاری برداشت خواننده از فصل است.')),
+Qn('diss',B('Who burns away a comprehended defect, according to the teaching?','طبق آموزه چه کسی عیب درک‌شده را می‌سوزاند؟'),[B('The Divine Mother Kundalini','مادر الهی کندالینی'),B('The intellect alone','عقل به‌تنهایی'),B('Willpower alone','اراده به‌تنهایی')],B('“It takes a power that is superior to the mind.”','«نیرویی برتر از ذهن لازم است.»')),
+Qn('diss',B('When a defect is removed…','وقتی عیبی برداشته می‌شود…'),[B('the opposite virtue can crystallise','فضیلت مقابل می‌تواند شکل بگیرد'),B('nothing changes','چیزی تغییر نمی‌کند'),B('guilt takes its place','احساس گناه جای آن را می‌گیرد')],B('Serenity replaces anger, altruism replaces egotism.','آرامش جای خشم و نوع‌دوستی جای خودخواهی را می‌گیرد.')),
+Qn('diss',B('Intellectual understanding of a defect is…','درک فکری از یک عیب…'),[B('not enough; it must be understood on every level of the mind','کافی نیست؛ باید در همه‌ی سطوح ذهن فهمیده شود'),B('enough','کافی است'),B('harmful','زیان‌بار است')],B('Examine it in deep meditation until it disintegrates.','آن را در مدیتیشن عمیق بررسی کنید تا از هم بپاشد.')),
+Qn('life',B('What is called the best weapon in life?','بهترین سلاح در زندگی چه نامیده شده؟'),[B('A correct psychological state','حالت روانی درست'),B('Money','پول'),B('Arguments','استدلال‌ها')],B('Treatise ch. 9.','رساله، فصل ۹.')),
+Qn('life',B('To live intelligently is to…','زندگی هوشمندانه یعنی…'),[B('combine internal states correctly with external events','حالت‌های درونی را درست با رویدادهای بیرونی ترکیب کردن'),B('avoid all events','از همه‌ی رویدادها دوری کردن'),B('suppress every feeling','هر احساسی را سرکوب کردن')],B('Mastery is balance, not suppression.','استادی تعادل است نه سرکوب.')),
+Qn('life',B('What happens if you practise but do not give?','اگر تمرین کنید ولی ندهید چه می‌شود؟'),[B('Inner progress becomes very difficult','پیشرفت درونی بسیار دشوار می‌شود'),B('You save energy','انرژی ذخیره می‌کنید'),B('Nothing','هیچ')],B('It reflects a lack of love for others.','نشانه‌ی کمبود عشق به دیگران است.')),
+Qn('med',B('When fear arises as the sense of self begins to dissolve…','وقتی با شروع حل شدن حس «خود» ترس می‌آید…'),[B('analyse the “I” of fear and invoke the Divine Mother','«من»ِ ترس را تحلیل کنید و مادر الهی را فرا بخوانید'),B('stop meditating for good','برای همیشه مدیتیشن را رها کنید'),B('suppress it','آن را سرکوب کنید')],B('“One needs to remove the I of terror.”','«باید «من»ِ وحشت را برداشت.»')),
+Qn('med',B('Why does awareness of time block the experience?','چرا آگاهی از زمان تجربه را مسدود می‌کند؟'),[B('The ego is itself a form of time','ایگو خودش شکلی از زمان است'),B('Clocks are noisy','ساعت‌ها پرسروصدا هستند'),B('Time is an illusion of the body','زمان توهم بدن است')],B('Live within the eternal instant; impatience is another “I”.','در لحظه‌ی ابدی زندگی کنید؛ بی‌صبری «من» دیگری است.')),
+Qn('level',B('Where do life events and the Level of Being lie?','رویدادهای زندگی و سطح هستی کجا قرار دارند؟'),[B('Events on the horizontal line of time, Being on the vertical','رویدادها روی خط افقی زمان، هستی روی خط عمودی'),B('Both on the vertical','هر دو روی خط عمودی'),B('Both on the horizontal','هر دو روی خط افقی')],B('The two cross inside the psyche at every moment.','این دو در هر لحظه درون روان یکدیگر را قطع می‌کنند.')),
+Qn('level',B('What comes before moving to a higher level?','پیش از رفتن به سطح بالاتر چه می‌آید؟'),[B('Honest knowledge of your present level','شناخت صادقانه‌ی سطح فعلی'),B('Ignoring your present level','نادیده گرفتن سطح فعلی'),B('Comparing yourself with others','مقایسه‌ی خود با دیگران')],B('“It would be impossible to pass into another level if we ignore the level in which we presently are.”','«اگر سطح کنونی را نادیده بگیریم، گذر به سطح دیگر ناممکن است.»'))
+];
+const TF=[
+[B('Consciousness is the same thing as the intellect.','کانشسنس همان عقل است.'),false,B('It is not the intellect; it uses it as a tool.','عقل نیست؛ از آن به‌عنوان ابزار استفاده می‌کند.')],
+[B('The teaching says about 3% of consciousness is free.','آموزه می‌گوید حدود ۳٪ کانشسنس آزاد است.'),true,B('The rest is bottled up inside the “I”s.','بقیه داخل «من»ها محبوس است.')],
+[B('Finding a defect in yourself is a reason for joy.','یافتن عیب در خود جای شادی دارد.'),true,B('A defect that is found can be made to die.','عیبِ کشف‌شده را می‌توان میراند.')],
+[B('Knowing the doctrine of the many “I”s is enough to change.','دانستن آموزه‌ی «من»های بسیار برای تغییر کافی است.'),false,B('Knowledge is of the mind, comprehension is of the heart.','دانش از آنِ ذهن است و درک از آنِ قلب.')],
+[B('Self-observation means thinking about yourself and your problems.','مشاهده‌ی خود یعنی فکر کردن درباره‌ی خود و مشکلاتتان.'),false,B('Observation is active attention that separates observer from observed.','مشاهده توجه فعالی است که ناظر را از مشاهده‌شونده جدا می‌کند.')],
+[B('The Essence grows automatically throughout life.','اسنس در سراسر زندگی خودبه‌خود رشد می‌کند.'),false,B('Natural growth is small and mostly in early childhood.','رشد طبیعی اندک است و بیشتر در کودکی رخ می‌دهد.')],
+[B('Direct experience of reality is said to begin around 4–5% awakened consciousness.','گفته می‌شود تجربه‌ی مستقیم واقعیت از حدود ۴ تا ۵٪ کانشسنس بیدار آغاز می‌شود.'),true,B('Direct Experience, Hell, the Devil and Karma ch. 25.','تجربه‌ی مستقیم، جهنم، شیطان و کارما، فصل ۲۵.')],
+[B('The mind alone can remove a defect.','ذهن به‌تنهایی می‌تواند عیبی را بردارد.'),false,B('A power superior to the mind is needed.','نیرویی برتر از ذهن لازم است.')],
+[B('Identification with events puts consciousness to sleep.','همذات‌پنداری با رویدادها کانشسنس را به خواب می‌برد.'),true,B('Identification leads to fascination.','همذات‌پنداری به شیفتگی می‌انجامد.')],
+[B('The faults we see in others do not exist in us.','عیب‌هایی که در دیگران می‌بینیم در ما نیست.'),false,B('They exist in us. Put yourself in the other’s place.','در ما هم هست. خود را جای او بگذارید.')],
+[B('Practising without sharing leads to egotism.','تمرین بدون سهیم کردن دیگران به خودخواهی می‌انجامد.'),true,B('Treatise ch. 31.','رساله، فصل ۳۱.')],
+[B('Impatience is another “I” to be understood.','بی‌صبری «من» دیگری است که باید درک شود.'),true,B('Profound Meditation, ch. 5.','مدیتیشن ژرف، فصل ۵.')],
+[B('Progress can be bought or rushed.','پیشرفت را می‌توان خرید یا شتاب داد.'),false,B('It is slow and gradual.','کند و تدریجی است.')],
+[B('The 97% and 3% figures are independently verified science.','اعداد ۹۷٪ و ۳٪ علم تأییدشده‌ی مستقل هستند.'),false,B('They are the tradition’s own claim.','ادعای خود همین سنت هستند.')]
+];
+const MT=[
+[B('Essence','اسنس'),B('Our consciousness: the aware, perceiving part, a form of light','کانشسنس ما: بخش آگاه و درک‌کننده، شکلی از نور')],
+[B('Ego, the “I”','ایگو، «من»'),B('A sum of psychological aggregates in which the Essence is trapped','مجموعه‌ی تجمعات روانی که اسنس در آن‌ها گرفتار است')],
+[B('Self-observation','مشاهده‌ی خود'),B('Directed inward attention that separates observer from observed','توجه هدایت‌شده‌ی درونی که ناظر را از مشاهده‌شونده جدا می‌کند')],
+[B('Self-remembering','خودیادآوری'),B('Active, will-controlled awareness of being here and now','آگاهی فعال و تحت کنترل اراده از بودن در اینجا و اکنون')],
+[B('Identification','همذات‌پنداری'),B('Becoming absorbed in an event, object or desire; it puts consciousness to sleep','غرق شدن در یک رویداد، شیء یا میل؛ کانشسنس را به خواب می‌برد')],
+[B('Gnosis','گنوسیس'),B('Direct, experiential knowledge gained by perceiving for oneself','دانش مستقیم و تجربی که با ادراک شخصی به دست می‌آید')],
+[B('Self-cognizance','خودشناسی'),B('Degree of consciousness; it rises with each dissolved “I”','درجه‌ی کانشسنس؛ با هر «من»ِ حل‌شده بالا می‌رود')],
+[B('Divine Mother Kundalini','مادر الهی کندالینی'),B('The power invoked to burn away a comprehended defect','نیرویی که برای سوزاندن عیب درک‌شده فراخوانده می‌شود')]
+];
+const OR=[
+{n:B('Dissolving an “I”','حل کردن یک «من»'),s:[B('Discover the defect in daily life','عیب را در زندگی روزمره کشف کنید'),B('Observe it without excusing or condemning','آن را بدون توجیه و محکوم کردن مشاهده کنید'),B('Meditate until it is understood on every level','مدیتیشن کنید تا در همه‌ی سطوح فهمیده شود'),B('Ask the Divine Mother Kundalini to dissolve it','از مادر الهی کندالینی بخواهید آن را حل کند'),B('Cultivate the opposite virtue','فضیلت مقابل را بپرورانید')]},
+{n:B('When something stirs you','وقتی چیزی شما را برمی‌انگیزد'),s:[B('Stop','بایستید'),B('Name the “I”','«من» را نام ببرید'),B('Observe it in head, heart and body','آن را در سر، قلب و بدن مشاهده کنید'),B('Do not identify with the scene','با صحنه همذات‌پنداری نکنید'),B('Review it in the evening','شب مرورش کنید')]},
+{n:B('Evening retrospection','بازنگری شبانه'),s:[B('Review the day’s manifestations of the ego','تظاهرات ایگو در روز را مرور کنید'),B('Number them','آن‌ها را شماره بزنید'),B('Choose one to work on','یکی را برای کار انتخاب کنید'),B('Meditate until you comprehend it','مدیتیشن کنید تا درکش کنید'),B('Pray to the Divine Mother','به مادر الهی دعا کنید')]}
+];
+const ts={tab:'quiz',quiz:{topic:'all',run:null,end:false},tf:{i:0,pick:null,score:0,end:false,list:null},match:{sel:null,done:new Set(),wrong:0,defs:null},ord:{set:0,next:0,wrong:0,items:null}};
+function renderTests(){
+  const tabs=[['quiz',S.tab_quiz],['tf',S.tab_tf],['match',S.tab_match],['ord',S.tab_ord]];
+  $('#ttabs').innerHTML=tabs.map(t=>`<button type="button" role="tab" data-act="ttab" data-t="${t[0]}" aria-selected="${ts.tab===t[0]}">${esc(L(t[1]))}</button>`).join('');
+  ({quiz:renderQuiz,tf:renderTF,match:renderMatch,ord:renderOrd})[ts.tab]();
+}
+function renderQuiz(){
+  const q=ts.quiz,el=$('#tbody');
+  if(!q.run){
+    el.innerHTML=`<p>${esc(L(S.quizSetup))}</p><div class="ctxbar" style="margin-top:12px">${['all',...Object.keys(QT)].map(k=>`<button type="button" class="chip" data-act="qtopic" data-k="${k}" aria-pressed="${q.topic===k}">${esc(L(k==='all'?S.all:QT[k]))}</button>`).join('')}</div><div class="row"><button type="button" class="btn" data-act="qstart">${esc(L(S.qStart))}</button><span class="small">${esc(fill(L(S.qBest),{b:num(P.best)}))}</span></div>`;return;
+  }
+  const r=q.run;
+  if(q.end){
+    const pct=Math.round(r.score/r.qs.length*100);
+    el.innerHTML=`<div class="score">${num(r.score)} / ${num(r.qs.length)}</div><p>${esc(fill(L(S.qScore),{s:num(r.score),n:num(r.qs.length)}))}</p><p class="small" style="margin-top:6px">${esc(L(pct>=70?S.qHigh:S.qLow))} ${esc(fill(L(S.qBest),{b:num(P.best)}))}</p>${r.missed.length?`<h3 style="margin-top:16px;font-size:1.1rem">${esc(L(S.qMissed))}</h3><div class="missed">${r.missed.map(m=>`<div><b>${esc(L(m.q))}</b><br>${esc(L(m.o[0]))}<br><span class="small">${esc(L(m.w))}</span></div>`).join('')}</div>`:''}<div style="margin-top:14px"><button type="button" class="btn" data-act="qretry">${esc(L(S.qRetry))}</button></div>`;return;
+  }
+  const cur=r.qs[r.i];
+  let h=`<div class="qn">${esc(fill(L(S.qNum),{i:num(r.i+1),n:num(r.qs.length)}))} · ${esc(L(QT[cur.t]))}</div><div class="qq">${esc(L(cur.q))}</div><div class="qopts">`;
+  r.order.forEach(k=>{let c='opt';if(r.pick!==null){if(k===0)c+=' right';else if(k===r.pick)c+=' wrong'}h+=`<button type="button" class="${c}" data-act="qpick" data-k="${k}" ${r.pick!==null?'disabled':''}>${esc(L(cur.o[k]))}</button>`});
+  h+='</div>';
+  if(r.pick!==null)h+=`<div class="fb ${r.pick===0?'ok':'no'}" aria-live="polite">${esc(L(cur.w))}</div><div style="margin-top:12px"><button type="button" class="btn" data-act="qnext">${esc(L(r.i===r.qs.length-1?S.qSee:S.qNext))}</button></div>`;
+  el.innerHTML=h;
+}
+function renderTF(){
+  const t=ts.tf,el=$('#tbody');
+  if(!t.list)t.list=shuf(TF);
+  if(t.end){el.innerHTML=`<div class="score">${num(t.score)} / ${num(TF.length)}</div><p>${esc(fill(L(S.tfEnd),{s:num(t.score),n:num(TF.length)}))} ${esc(fill(L(S.tfBest),{b:num(P.tfBest),n:num(TF.length)}))}</p><div style="margin-top:14px"><button type="button" class="btn" data-act="tfretry">${esc(L(S.qRetry))}</button></div>`;return}
+  const c=t.list[t.i];
+  let h=`<div class="qn">${esc(fill(L(S.qNum),{i:num(t.i+1),n:num(TF.length)}))}</div><p class="small" style="margin-top:4px">${esc(L(S.tfQ))}</p><div class="qq">${esc(L(c[0]))}</div><div class="opts">`;
+  [true,false].forEach(v=>{let k='opt';if(t.pick!==null){if(v===c[1])k+=' right';else if(v===t.pick)k+=' wrong'}h+=`<button type="button" class="${k}" data-act="tfpick" data-v="${v}" ${t.pick!==null?'disabled':''}>${esc(L(v?S.tfT:S.tfF))}</button>`});
+  h+='</div>';
+  if(t.pick!==null)h+=`<div class="fb ${t.pick===c[1]?'ok':'no'}" aria-live="polite">${esc(L(c[2]))}</div><div style="margin-top:12px"><button type="button" class="btn" data-act="tfnext">${esc(L(t.i===TF.length-1?S.qSee:S.qNext))}</button></div>`;
+  el.innerHTML=h;
+}
+function renderMatch(){
+  const m=ts.match,el=$('#tbody');
+  if(!m.defs)m.defs=shuf(MT.map((_,i)=>i));
+  const all=m.done.size===MT.length;
+  let h=`<p>${esc(L(S.matchIntro))}</p><div class="pair" style="margin-top:12px"><div class="col">${MT.map((t,i)=>`<button type="button" class="opt${m.done.has(i)?' done':''}${m.sel===i?' sel':''}" data-act="mterm" data-i="${i}" ${m.done.has(i)?'disabled':''}>${esc(L(t[0]))}</button>`).join('')}</div><div class="col">${m.defs.map(i=>`<button type="button" class="opt${m.done.has(i)?' done':''}" data-act="mdef" data-i="${i}" ${m.done.has(i)?'disabled':''}>${esc(L(MT[i][1]))}</button>`).join('')}</div></div>`;
+  if(all)h+=`<div class="fb ok" aria-live="polite">${esc(fill(L(S.matchDone),{w:num(m.wrong)}))}</div><div style="margin-top:12px"><button type="button" class="btn" data-act="mreset">${esc(L(S.qRetry))}</button></div>`;
+  el.innerHTML=h;
+}
+function renderOrd(){
+  const o=ts.ord,el=$('#tbody'),set=OR[o.set];
+  if(!o.items)o.items=shuf(set.s.map((_,i)=>i));
+  const done=o.next>=set.s.length;
+  let h=`<p>${esc(L(S.ordIntro))}</p><div class="ctxbar" style="margin-top:10px">${OR.map((x,i)=>`<button type="button" class="chip" data-act="oset" data-i="${i}" aria-pressed="${o.set===i}">${esc(L(x.n))}</button>`).join('')}</div><div class="ord">${o.items.map(i=>{const d=i<o.next;return `<button type="button" class="opt${d?' done':''}" data-act="opick" data-i="${i}" ${d?'disabled':''}><span class="n">${d?num(i+1):'?'}</span>${esc(L(set.s[i]))}</button>`}).join('')}</div>`;
+  if(done)h+=`<div class="fb ok" aria-live="polite">${esc(fill(L(S.ordDone),{w:num(o.wrong)}))}</div>`;
+  h+=`<div style="margin-top:12px"><button type="button" class="btn ghost" data-act="oreset">${esc(L(S.ordReset))}</button></div>`;
+  el.innerHTML=h;
+}
+
+/* ---------- flashcards ---------- */
+const FC=[
+[B('Consciousness / Essence','کانشسنس / اسنس'),B('The aware, perceiving part of us; a form of light. In Gnosis, the Essence is our consciousness.','بخش آگاه و درک‌کننده‌ی ما؛ شکلی از نور. در گنوسیس، اسنس همان کانشسنس ماست.')],
+[B('Ego / the “I”','ایگو / «من»'),B('A sum of psychological aggregates (anger, pride, lust…) in which the Essence is trapped.','مجموعه‌ی تجمعات روانی (خشم، غرور، شهوت…) که اسنس در آن‌ها گرفتار است.')],
+[B('Subconsciousness','ناخودآگاه'),B('The part of consciousness held in the ego; active in sleep and dreams.','بخشی از کانشسنس که در ایگو نگه داشته شده؛ در خواب و رؤیا فعال است.')],
+[B('Self-observation','مشاهده‌ی خود'),B('Directed inward attention that separates the observer from the observed.','توجه هدایت‌شده‌ی درونی که ناظر را از مشاهده‌شونده جدا می‌کند.')],
+[B('Self-remembering','خودیادآوری'),B('Active, will-controlled awareness of being here and now.','آگاهی فعال و تحت کنترل اراده از بودن در اینجا و اکنون.')],
+[B('Identification','همذات‌پنداری'),B('Becoming absorbed in an event, object or desire. It leads to fascination.','غرق شدن در یک رویداد، شیء یا میل. به شیفتگی می‌انجامد.')],
+[B('Fascination','شیفتگی'),B('The state that puts consciousness to sleep.','حالتی که کانشسنس را به خواب می‌برد.')],
+[B('Self-cognizance','خودشناسی'),B('Degree of consciousness; rises with each dissolved “I”.','درجه‌ی کانشسنس؛ با هر «من»ِ حل‌شده بالا می‌رود.')],
+[B('Level of Being','سطح هستی'),B('Your vertical position on the ladder of inner states.','جایگاه عمودی شما روی نردبان حالت‌های درونی.')],
+[B('Divine Mother Kundalini','مادر الهی کندالینی'),B('The power invoked to burn away a comprehended defect.','نیرویی که برای سوزاندن عیب درک‌شده فراخوانده می‌شود.')],
+[B('Three brains','سه مغز'),B('Intellectual, emotional, and motor-instinctive-sexual centers.','مراکز عقلی، عاطفی و حرکتی-غریزی-جنسی.')],
+[B('Illuminating Void','تهی‌گاه نورانی'),B('A meditative state of direct, non-conceptual experience of reality.','حالت مدیتیشنی تجربه‌ی مستقیم و بدون مفهومِ واقعیت.')],
+[B('Turiya / Samadhi','تُریا / سامادی'),B('States of awakened consciousness that cannot dream; ecstasy.','حالت‌های کانشسنس بیدار که رؤیا نمی‌بیند؛ وجد.')],
+[B('Gnosis','گنوسیس'),B('Direct, experiential knowledge gained only by perceiving for oneself.','دانش مستقیم و تجربی که فقط با ادراک شخصی به دست می‌آید.')],
+[B('Conditioned consciousness','کانشسنس مشروط'),B('Perception filtered by past experience, desire, fear and stress.','ادراکی که با تجربه‌ی گذشته، میل، ترس و استرس فیلتر شده.')],
+[B('First Conscious Shock','نخستین شوک آگاهانه'),B('Transforming an impression at the moment it enters, for example reflecting on mortality to transform lust.','دگرگون کردن یک برداشت در لحظه‌ی ورودش، مثلاً تأمل در مرگ برای دگرگون کردن شهوت.')]
+];
+const fl={i:0,flip:false,only:false};
+function flList(){return FC.map((c,i)=>i).filter(i=>!fl.only||!P.flash[i])}
+function renderFlash(){
+  const list=flList(),el=$('#flash');
+  const kc=Object.keys(P.flash).length;
+  let h=`<label style="display:inline-flex;gap:8px;align-items:center;margin-bottom:12px"><input type="checkbox" id="fl-only" ${fl.only?'checked':''}> ${esc(L(S.onlyUnknown))}</label>`;
+  if(!list.length){el.innerHTML=h+`<div class="note">${esc(L(S.allKnown))}</div>`;return}
+  if(fl.i>=list.length)fl.i=0;
+  const id=list[fl.i],c=FC[id];
+  h+=`<div class="fc"><button type="button" class="fcard" data-act="flip" aria-live="polite">${fl.flip?`<div class="d">${esc(L(c[1]))}</div>`:`<div><div class="t">${esc(L(c[0]))}</div><small>${esc(L(S.flip))}</small></div>`}</button></div><p class="qn" style="margin-top:10px;text-align:center">${esc(fill(L(S.cardOf),{i:num(fl.i+1),n:num(list.length),k:num(kc)}))}</p><div class="row" style="justify-content:center;margin-top:8px"><button type="button" class="btn ghost" data-act="fagain">${esc(L(S.again))}</button><button type="button" class="btn" data-act="fknow">${esc(L(S.know))}</button></div>`;
+  el.innerHTML=h;
+}
+
+/* ---------- tracker ---------- */
+const DP=[
+B('Asked “Where am I?” during the day','در طول روز پرسیدم «کجا هستم؟»'),
+B('Did a Key of Sol round (subject, object, place)','یک دور کلید سول (سوژه، ابژه، مکان) انجام دادم'),
+B('Observed an “I” while it was active','یک «من» را هنگام فعال بودنش مشاهده کردم'),
+B('Paused before a reaction','پیش از یک واکنش درنگ کردم'),
+B('Did the evening retrospection','بازنگری شبانه را انجام دادم'),
+B('Meditated (Ham-Sah or similar)','مدیتیشن کردم (هام-ساه یا مشابه)'),
+B('Shared something I learned','چیزی را که آموختم با دیگری در میان گذاشتم')
+];
+const dkey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function streakN(){
+  let n=0;const d=new Date();
+  const cnt=k=>(P.track[k]||[]).length;
+  if(cnt(dkey(d))<4)d.setDate(d.getDate()-1);
+  while(cnt(dkey(d))>=4){n++;d.setDate(d.getDate()-1)}
+  return n;
+}
+function renderTrack(){
+  const now=new Date(),tk=dkey(now),cur=P.track[tk]||[];
+  let h=`<div class="row"><b>${esc(L(S.today))}</b><span class="small">${esc(now.toLocaleDateString(lang==='fa'?'fa-IR':undefined,{dateStyle:'medium'}))}</span><span class="small" style="margin-inline-start:auto">${esc(fill(L(S.streak),{n:num(streakN())}))}</span></div><div class="checks">${DP.map((p,i)=>`<label><input type="checkbox" data-act="tick" data-i="${i}" ${cur.includes(i)?'checked':''}> ${esc(L(p))}</label>`).join('')}</div><div class="grid40" aria-hidden="true">`;
+  for(let k=39;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);const n=(P.track[dkey(d)]||[]).length;h+=`<i class="cell${k===0?' today':''}" style="--a:${n/DP.length}"></i>`}
+  h+='</div>';
+  $('#track').innerHTML=h;
+}
+
+/* ---------- obstacles ---------- */
+const OB=[
+{t:B('Believing you are already awake','باور به اینکه از قبل بیدارید'),x:B('Accept that you are asleep. The teaching says that is an unmistakable sign you want to awaken.','بپذیرید که خواب هستید. آموزه می‌گوید این نشانه‌ی بی‌تردید خواستن بیداری است.')},
+{t:B('Knowing without living','دانستن بدون زیستن'),x:B('“Knowledge is of the mind. Comprehension is of the heart.” Turn each idea into an observed experience.','«دانش از آنِ ذهن است و درک از آنِ قلب.» هر ایده را به تجربه‌ای مشاهده‌شده تبدیل کنید.')},
+{t:B('Fantasy, megalomania and self-worship','خیال‌پردازی، خودبزرگ‌بینی و خودپرستی'),x:B('Belief in a permanent “I” or an inner image blocks self-observation. Observe without building theories.','باور به یک «من»ِ پایدار یا تصویر درونی مانع مشاهده‌ی خود می‌شود. بدون ساختن تئوری مشاهده کنید.')},
+{t:B('Fear','ترس'),x:B('When the sense of self begins to dissolve, fear can arise. Analyse the “I” of fear, then ask the Divine Mother to dissolve it.','وقتی حس «خود» شروع به حل شدن می‌کند ممکن است ترس بیاید. «من»ِ ترس را تحلیل کنید و از مادر الهی بخواهید آن را حل کند.')},
+{t:B('Impatience and watching the clock','بی‌صبری و نگاه به ساعت'),x:B('The ego is itself a form of time. Live in the eternal instant and treat impatience as another “I”.','ایگو خودش شکلی از زمان است. در لحظه‌ی ابدی زندگی کنید و بی‌صبری را «من» دیگری بدانید.')},
+{t:B('Trying to rely on the mind alone','تکیه بر ذهن به‌تنهایی'),x:B('The mind alone could not fundamentally alter any defect. A power superior to the mind is invoked.','ذهن به‌تنهایی نمی‌تواند هیچ عیبی را ریشه‌ای تغییر دهد. از نیرویی برتر از ذهن یاری می‌خواهیم.')},
+{t:B('Thinking about yourself instead of observing','فکر کردن درباره‌ی خود به‌جای مشاهده'),x:B('Observation is active attention that divides observer and observed. Thinking about yourself keeps you identified.','مشاهده توجه فعالی است که ناظر و مشاهده‌شونده را جدا می‌کند. فکر کردن درباره‌ی خود شما را همذات نگه می‌دارد.')},
+{t:B('Identification and fascination','همذات‌پنداری و شیفتگی'),x:B('Practise the subject-object-place exercise. Notice what captivates you and do not be absorbed.','تمرین سوژه-ابژه-مکان را انجام دهید. ببینید چه چیزی شما را شیفته می‌کند و در آن غرق نشوید.')},
+{t:B('Seeking change only outside','جستن تغییر فقط در بیرون'),x:B('Real social change begins with personal change. The exterior reflects the interior.','تغییر اجتماعی واقعی از تغییر شخصی آغاز می‌شود. بیرون بازتاب درون است.')},
+{t:B('Practising without sharing','تمرین بدون سهیم کردن دیگران'),x:B('Inner progress becomes very difficult if you practise but do not give.','اگر تمرین کنید ولی ندهید، پیشرفت درونی بسیار دشوار می‌شود.')}
+];
+function renderObst(){
+  const open=[...document.querySelectorAll('#obst details')].map(d=>d.open);
+  $('#obst').innerHTML=OB.map((o,i)=>`<details${open[i]?' open':''}><summary>${esc(L(o.t))}</summary><div class="dbody">${esc(L(o.x))}</div></details>`).join('');
+}
+
+/* ---------- journal ---------- */
+const JT=[B('Observation of an “I”','مشاهده‌ی یک «من»'),B('Evening retrospection','بازنگری شبانه'),B('Dream or presence note','یادداشت رؤیا یا حضور')];
+function loadJ(){try{return JSON.parse(LS.get('poa2-journal')||'[]')}catch(e){return[]}}
+function renderJ(){
+  const sel=$('#j-type'),cv=sel.value||'0';
+  sel.innerHTML=JT.map((t,i)=>`<option value="${i}">${esc(L(t))}</option>`).join('');sel.value=cv;
+  const a=loadJ();
+  $('#entries').innerHTML=a.length?a.map((e,i)=>`<div class="entry"><time>${esc(e.d)}</time><span class="ty">${esc(L(JT[e.y||0]))}</span><b>${esc(e.w||'')}</b><p>${esc(e.t||'')}</p><button type="button" data-act="jdel" data-i="${i}">${esc(L(S.j_del))}</button></div>`).join(''):`<p class="small">${esc(L(S.j_empty))}</p>`;
+}
+
+/* ---------- progress board ---------- */
+function renderDash(){
+  const lr=Object.keys(P.read).length,sc=Object.keys(P.scen).length,fk=Object.keys(P.flash).length,lt=litCount(),st=streakN();
+  const t=(v,l,pct)=>`<div class="tile"><b>${v}</b><span>${esc(L(l))}</span><div class="mini"><i style="width:${Math.min(100,pct)}%"></i></div></div>`;
+  $('#tiles').innerHTML=t(num(lr)+'/'+num(LESSONS.length),S.t_lessons,lr/LESSONS.length*100)+t(num(lt)+'%',S.t_light,lt)+t(num(sc)+'/'+num(SC.length),S.t_scen,sc/SC.length*100)+t(num(P.best)+'%',S.t_quiz,P.best)+t(num(st),S.t_streak,st/40*100)+t(num(fk)+'/'+num(FC.length),S.t_cards,fk/FC.length*100);
+}
+
+/* ---------- sources ---------- */
+const SRC=[['Consciousness (glossary)',G+'/glossary/c/consciousness'],['Essence (glossary)',G+'/glossary/e/essence'],['Self-observation (glossary)',G+'/glossary/s/self-observation'],['Self-remembering (glossary)',G+'/glossary/s/self-remembering'],['Three brains (glossary)',G+'/glossary/t/three-brains'],['Treatise of Revolutionary Psychology',G+'/books/treatise-of-revolutionary-psychology'],['The Narrow Way, ch. 11: The Consciousness',G+'/books/the-narrow-way/the-consciousness'],['The Perfect Matrimony, ch. 16',G+'/books/the-perfect-matrimony/the-awakening-of-consciousness'],['The Didactic for the Dissolution of the I',G+'/books/the-revolution-of-the-dialectic/the-didactic-for-the-dissolution-of-the-i'],['Key of Sol (lecture)',G+'/authors/samael-aun-weor/lectures/key-of-sol'],['The Conquest of the Illuminating Void',G+'/books/profound-meditation/the-conquest-of-the-illuminating-void'],['Hell, the Devil and Karma, ch. 25: Direct Experience',G+'/books/hell-the-devil-and-karma/direct-experience']];
+
+/* ---------- static + language ---------- */
+function applyStatic(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+  document.querySelectorAll('[data-s]').forEach(e=>{if(S[e.dataset.s])e.textContent=L(S[e.dataset.s])});
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===lang)));
+  $('#navbar').innerHTML=NAV.map(n=>`<button type="button" data-act="go" data-t="${n[0]}">${esc(L(n[1]))}</button>`).join('');
+  $('#srclist').innerHTML=SRC.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('');
+  document.title=L(S.title);
+}
+function renderAll(){applyStatic();renderDash();renderLessons();renderLight();renderLadder();renderLab();renderRx();renderRound();renderHam();renderAssess();renderTests();renderFlash();renderTrack();renderObst();renderJ()}
+
+/* ---------- events ---------- */
+let resetArmed=false;
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b||b.type==='checkbox')return;
+  const a=b.dataset.act;
+  if(a==='lang'){lang=b.dataset.v;LS.set('poa2-lang',lang);renderAll()}
+  else if(a==='go'){const t=document.getElementById(b.dataset.t);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}
+  else if(a==='resetAll'){if(!resetArmed){resetArmed=true;b.textContent=L(S.reset_sure);return}resetArmed=false;P={read:{},scen:{},best:0,tfBest:0,flash:{},track:{},assess:null,dis:[],match:0,ord:0};save();light.dis=new Set();light.sel=null;light.st=0;b.textContent=L(S.reset_all);renderAll()}
+  else if(a==='read'){const i=+b.dataset.i;if(P.read[i])delete P.read[i];else P.read[i]=1;save();renderLessons();renderDash()}
+  else if(a==='pickI'){light.sel=+b.dataset.k;light.st=light.dis.has(light.sel)?3:0;renderLight()}
+  else if(a==='doStep'){light.st++;if(light.st>=3){light.dis.add(light.sel);P.dis=[...light.dis];save();renderDash()}renderLight()}
+  else if(a==='resetLight'){light.sel=null;light.st=0;light.dis.clear();P.dis=[];save();renderLight();renderDash()}
+  else if(a==='rung'){const i=+b.dataset.i;openRung=openRung===i?-1:i;renderLadder()}
+  else if(a==='ctx'){lab.ctx=b.dataset.k;lab.pick=null;lab.ok=false;lab.i=labList()[0].i;renderLab()}
+  else if(a==='labPick'){const k=+b.dataset.k;lab.pick=k;lab.ok=k===SC[lab.i].a;if(lab.ok){P.scen[lab.i]=1;save();renderDash()}renderLab()}
+  else if(a==='labNext'){const list=labList();const p=list.findIndex(x=>x.i===lab.i);lab.i=list[(p+1)%list.length].i;lab.pick=null;lab.ok=false;renderLab()}
+  else if(a==='rxpick'){rxSel=+b.dataset.i;renderRx()}
+  else if(a==='roundGo'){clearInterval(rd.tm);rd.on=true;rd.fin=false;rd.ph=0;rd.left=15;rd.tm=setInterval(roundTick,1000);renderRound()}
+  else if(a==='roundStop'){clearInterval(rd.tm);rd.on=false;rd.fin=false;renderRound()}
+  else if(a==='hamGo'){clearInterval(hm.tm);hm.on=true;hm.fin=false;hm.t=0;hm.left=(+b.dataset.m)*60;renderHam();hm.tm=setInterval(hamTick,1000)}
+  else if(a==='hamStop'){clearInterval(hm.tm);hm.on=false;hm.fin=false;renderHam()}
+  else if(a==='prof'){P.assess=P.assess||{v:[]};P.assess.shown=true;save();showProf()}
+  else if(a==='ttab'){ts.tab=b.dataset.t;renderTests()}
+  else if(a==='qtopic'){ts.quiz.topic=b.dataset.k;renderTests()}
+  else if(a==='qstart'||a==='qretry'){
+    const pool=QB.filter(q=>ts.quiz.topic==='all'||q.t===ts.quiz.topic);
+    const qs=shuf(pool).slice(0,10);
+    ts.quiz.run={qs,i:0,pick:null,score:0,missed:[],order:shuf([0,1,2])};ts.quiz.end=false;renderTests();
+  }
+  else if(a==='qpick'){const r=ts.quiz.run;if(r.pick!==null)return;r.pick=+b.dataset.k;if(r.pick===0)r.score++;else r.missed.push(r.qs[r.i]);renderQuiz()}
+  else if(a==='qnext'){const r=ts.quiz.run;if(r.i===r.qs.length-1){ts.quiz.end=true;const pct=Math.round(r.score/r.qs.length*100);if(pct>P.best){P.best=pct;save();renderDash()}}else{r.i++;r.pick=null;r.order=shuf([0,1,2])}renderQuiz()}
+  else if(a==='tfpick'){const t=ts.tf;if(t.pick!==null)return;t.pick=b.dataset.v==='true';if(t.pick===t.list[t.i][1])t.score++;renderTF()}
+  else if(a==='tfnext'){const t=ts.tf;if(t.i===TF.length-1){t.end=true;if(t.score>P.tfBest){P.tfBest=t.score;save()}}else{t.i++;t.pick=null}renderTF()}
+  else if(a==='tfretry'){ts.tf={i:0,pick:null,score:0,end:false,list:null};renderTF()}
+  else if(a==='mterm'){ts.match.sel=+b.dataset.i;renderMatch()}
+  else if(a==='mdef'){const m=ts.match;if(m.sel===null)return;if(m.sel===+b.dataset.i){m.done.add(m.sel)}else m.wrong++;m.sel=null;renderMatch()}
+  else if(a==='mreset'){ts.match={sel:null,done:new Set(),wrong:0,defs:null};renderMatch()}
+  else if(a==='oset'){ts.ord={set:+b.dataset.i,next:0,wrong:0,items:null};renderOrd()}
+  else if(a==='opick'){const o=ts.ord;if(+b.dataset.i===o.next)o.next++;else o.wrong++;renderOrd()}
+  else if(a==='oreset'){ts.ord={set:ts.ord.set,next:0,wrong:0,items:null};renderOrd()}
+  else if(a==='flip'){fl.flip=!fl.flip;renderFlash()}
+  else if(a==='fknow'){const id=flList()[fl.i];P.flash[id]=1;save();fl.flip=false;renderFlash();renderDash()}
+  else if(a==='fagain'){const n=flList().length;fl.i=(fl.i+1)%Math.max(1,n);fl.flip=false;renderFlash()}
+  else if(a==='jsave'){
+    const w=$('#j-where').value.trim(),t=$('#j-text').value.trim();if(!w&&!t)return;
+    const arr=loadJ();arr.unshift({d:new Date().toLocaleString(lang==='fa'?'fa-IR':undefined,{dateStyle:'medium',timeStyle:'short'}),y:+$('#j-type').value,w,t});
+    LS.set('poa2-journal',JSON.stringify(arr.slice(0,200)));$('#j-where').value='';$('#j-text').value='';renderJ();
+  }
+  else if(a==='jdel'){const arr=loadJ();arr.splice(+b.dataset.i,1);LS.set('poa2-journal',JSON.stringify(arr));renderJ()}
+});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.name&&/^a\d+$/.test(t.name)){const i=+t.name.slice(1);P.assess=P.assess||{v:[]};P.assess.v=P.assess.v||[];P.assess.v[i]=+t.value;save()}
+  else if(t.dataset&&t.dataset.act==='tick'){const k=dkey(new Date()),i=+t.dataset.i;let c=P.track[k]||[];c=t.checked?[...new Set([...c,i])]:c.filter(x=>x!==i);P.track[k]=c;save();renderTrack();renderDash()}
+  else if(t.id==='fl-only'){fl.only=t.checked;fl.i=0;renderFlash()}
+});
+renderAll();
+</script>
+
+</body>
+</html>
